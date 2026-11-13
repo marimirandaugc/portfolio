@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mariana Miranda · portfólio UGC</title>
+<meta name="description" content="Mariana Miranda, UGC creator: conteúdo que parece conversa e vende como anúncio. Veja os vídeos e peça um orçamento.">
+
+<!-- Prévia do link (WhatsApp, Instagram, etc.). Depois de publicar, troque MEU-LINK pelo endereço do site. -->
+<meta property="og:title" content="Mariana Miranda · UGC creator">
+<meta property="og:description" content="Conteúdo que parece conversa e vende como anúncio">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://MEU-LINK/">
+<meta property="og:image" content="https://MEU-LINK/midia/capa.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Josefin+Sans:wght@400;600;700&family=Patrick+Hand+SC&family=Yellowtail&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --oliva:#4A5E1A; --limao:#D4EBA0; --lilas:#DCCDF6; --azul:#A9C6FF;
+  --creme:#F8F6F0; --preto:#111; --uva:#4B1E4F; --branco:#fff;
+  --serif:"Instrument Serif", Georgia, serif;
+  --cursiva:"Yellowtail", cursive;
+  --mao:"Patrick Hand SC", "Comic Sans MS", cursive;
+  --texto:"Josefin Sans", system-ui, sans-serif;
+  --borda:2px solid var(--preto);
+  --largura:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--texto);font-size:16px;line-height:1.55;color:var(--preto);background:var(--creme);overflow-x:clip;-webkit-font-smoothing:antialiased}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+section{scroll-margin-top:84px}
+.envelope{max-width:var(--largura);margin:0 auto;padding:0 32px}
+
+/* ---------- tipografia ---------- */
+.titulo{font-family:var(--serif);font-weight:400;text-transform:uppercase;line-height:.95;letter-spacing:.01em;transform:scaleY(1.12);transform-origin:center bottom;font-size:clamp(30px,4.6vw,44px)}
+.cursiva{font-family:var(--cursiva);text-transform:none;letter-spacing:0;font-weight:400}
+.mao{font-family:var(--mao)}
+.marca-texto{background:linear-gradient(transparent 52%,var(--limao) 52% 94%,transparent 94%);-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .08em}
+
+/* ---------- botões ---------- */
+.botao{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--mao);font-size:17px;text-decoration:none;padding:11px 20px;background:var(--lilas);color:var(--preto);border:var(--borda);box-shadow:3px 3px 0 var(--preto);transition:transform .15s,box-shadow .15s;border-radius:0}
+.botao:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--preto)}
+.botao:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--preto)}
+.botao.limao{background:var(--limao)}
+.botao.branco{background:var(--branco)}
+.botao:focus-visible,a:focus-visible,button:focus-visible,[role=button]:focus-visible,input:focus-visible{outline:3px solid var(--uva);outline-offset:3px}
+
+/* ---------- lacunas listradas (o que ainda falta colocar) ---------- */
+.lacuna{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:14px;color:var(--preto);
+  background:repeating-linear-gradient(45deg,#ebe6d6 0 10px,#f8f6f0 10px 20px);border:2px dashed #8a8570;font-size:13px;line-height:1.35;width:100%;height:100%;min-height:90px}
+.lacuna .icone{font-size:24px;line-height:1}
+.lacuna code{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:#fff;border:1px solid #c9c3ad;padding:1px 5px;word-break:break-all}
+.lacuna-texto{display:inline-block;font-size:13px;padding:2px 8px;background:repeating-linear-gradient(45deg,#ebe6d6 0 6px,#f8f6f0 6px 12px);border:1px dashed #8a8570;color:var(--preto);font-family:var(--texto)}
+
+/* ---------- capa ---------- */
+.capa{background:var(--oliva);color:var(--branco);position:relative;padding:18px 0 0;overflow:hidden}
+.menu{position:sticky;top:12px;z-index:50;max-width:var(--largura);margin:0 auto;padding:0 32px}
+.capa .menu{position:relative}
+.menu-barra{display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--branco);color:var(--preto);border:var(--borda);padding:10px 12px 10px 20px}
+.logo{font-family:var(--serif);font-size:22px;text-transform:uppercase;text-decoration:none;letter-spacing:.03em;white-space:nowrap}
+.logo span{color:var(--oliva);margin:0 4px}
+.menu-links{display:flex;gap:22px;list-style:none;font-family:var(--mao);font-size:16px}
+.menu-links a{text-decoration:none}
+.menu-links a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.pilula{font-family:var(--mao);font-size:16px;background:var(--limao);border:var(--borda);border-radius:999px;padding:7px 16px;text-decoration:none;white-space:nowrap}
+.menu-abrir{display:none;background:none;border:var(--borda);padding:6px 10px;font-family:var(--mao);font-size:16px}
+.menu-fixo{position:fixed;top:12px;left:0;right:0;z-index:60;transform:translateY(-130%);transition:transform .25s}
+.menu-fixo.visivel{transform:none}
+
+.capa-grade{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:56px 32px 110px;max-width:var(--largura);margin:0 auto}
+.pombo{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.pombo .emoji{font-size:30px}
+.pombo .cursiva{color:var(--limao);font-size:28px;transform:rotate(-6deg);display:inline-block}
+.capa-pre{font-family:var(--serif);text-transform:uppercase;color:var(--limao);font-size:22px;letter-spacing:.04em}
+.capa-pre .cursiva{font-size:28px;margin-left:4px}
+.capa-nome{font-family:var(--serif);font-weight:400;text-transform:uppercase;line-height:.88;font-size:clamp(56px,8vw,100px);transform:scaleY(1.12);transform-origin:left top;margin:8px 0 26px;color:var(--branco);letter-spacing:.005em}
+.capa-nichos{font-family:var(--mao);font-size:17px;color:var(--limao);margin-bottom:8px}
+.capa-frase{font-size:19px;max-width:30ch;margin-bottom:24px;line-height:1.4}
+.capa-botoes{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:34px}
+.provas{display:flex;flex-wrap:wrap;gap:26px;list-style:none}
+.provas li{border-left:3px solid var(--limao);padding-left:12px}
+.provas strong{display:block;font-family:var(--serif);font-weight:400;font-size:34px;line-height:1}
+.provas span{font-size:14px;opacity:.95}
+
+.fotos{position:relative;width:100%;max-width:400px;aspect-ratio:4/5;justify-self:center;margin-right:20px}
+.foto-moldura{position:absolute;border:var(--borda);box-shadow:5px 5px 0 var(--preto)}
+.foto-moldura .quadro{width:100%;height:100%;overflow:hidden;background:var(--creme)}
+.foto-moldura img{width:100%;height:100%;object-fit:cover}
+.foto-tras{width:62%;height:62%;right:-22px;top:-14px;padding:10px;background:var(--limao);transform:rotate(7deg)}
+.foto-frente{width:80%;height:86%;left:0;bottom:0;padding:14px;background:var(--lilas);transform:rotate(-4deg)}
+.foto-frente .lacuna,.foto-tras .lacuna{font-size:13px}
+.selo-brilho{position:absolute;left:-34px;bottom:-34px;width:112px;height:112px;z-index:3}
+.selo-brilho svg{width:100%;height:100%;animation:girar 22s linear infinite}
+.selo-brilho .b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--cursiva);color:var(--oliva);font-size:40px;line-height:1;padding-bottom:6px}
+@keyframes girar{to{transform:rotate(360deg)}}
+.onda{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:70px;display:block}
+
+/* ---------- sobre ---------- */
+.sobre{padding:70px 0 90px}
+.sobre-topo{text-align:center;margin-bottom:56px}
+.sobre-topo .titulo{font-size:clamp(36px,6vw,44px);transform-origin:center}
+.sobre-topo p{font-family:var(--mao);font-size:19px;margin-top:16px}
+.sobre-grade{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:start}
+.sobre-foto-area{position:relative;padding-left:46px}
+.postal{padding:16px;background:var(--azul);
+  -webkit-mask:radial-gradient(circle 7px,#0000 97%,#000) -10px -10px/20px 20px round,linear-gradient(#000 0 0) content-box;
+  mask:radial-gradient(circle 7px,#0000 97%,#000) -10px -10px/20px 20px round,linear-gradient(#000 0 0) content-box;
+  transform:rotate(-2deg);filter:drop-shadow(4px 4px 0 var(--preto))}
+.postal .quadro{aspect-ratio:4/5;overflow:hidden;background:var(--creme)}
+.postal img{width:100%;height:100%;object-fit:cover}
+.vertical{position:absolute;left:0;top:30px;writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--cursiva);font-size:28px;color:var(--uva);white-space:nowrap}
+.seta{position:absolute;right:-48px;top:40px;width:80px;height:70px}
+.sobre-texto .titulo{text-align:left;transform-origin:left bottom;margin-bottom:28px;line-height:1.05}
+.sobre-texto .titulo .cursiva{font-size:1.15em;color:var(--oliva)}
+.sobre-texto .corpo{text-align:justify;hyphens:auto;font-size:16px;margin-bottom:26px}
+.sobre-texto .corpo p+p{margin-top:10px}
+.diferenciais{list-style:none;display:grid;gap:12px;margin-bottom:26px}
+.diferenciais li{display:flex;gap:12px;align-items:flex-start;background:var(--branco);border:var(--borda);padding:12px 14px;font-size:15px}
+.diferenciais .num{font-family:var(--serif);font-size:24px;line-height:1;color:var(--oliva);min-width:26px}
+.selo-metodo{display:inline-flex;align-items:center;gap:10px;background:var(--uva);color:var(--branco);padding:10px 16px;border:var(--borda);font-family:var(--mao);font-size:16px;box-shadow:3px 3px 0 var(--preto)}
+
+/* ---------- faixas rolando ---------- */
+.faixa{background:var(--preto);color:var(--branco);overflow:hidden;padding:14px 0;border-block:var(--borda)}
+.faixa-trilho{display:flex;width:max-content;animation:rolar 40s linear infinite}
+.faixa-item{display:flex;align-items:center;gap:26px;padding-right:26px;font-family:var(--serif);font-style:italic;font-size:24px;white-space:nowrap}
+.faixa-item .flor{color:var(--limao);font-style:normal;font-size:18px}
+.faixa-item img{height:30px;width:auto;background:var(--branco);padding:4px 8px}
+@keyframes rolar{to{transform:translateX(-50%)}}
+.faixa-dica{padding:10px 32px;max-width:var(--largura);margin:0 auto}
+.faixa-dica .lacuna{min-height:0;flex-direction:row;padding:8px 12px}
+
+/* ---------- destaques ---------- */
+.destaques{background:var(--lilas);padding:80px 0;border-bottom:var(--borda)}
+.destaques .titulo{text-align:center;margin-bottom:12px;transform-origin:center}
+.destaques .titulo .cursiva{font-size:.9em;color:var(--uva)}
+.sub{text-align:center;font-family:var(--mao);font-size:17px;margin-bottom:44px}
+.fileira{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:28px;align-items:end;max-width:860px;margin:0 auto}
+.cartao{background:var(--branco);border:var(--borda);box-shadow:4px 4px 0 var(--preto);padding:12px;position:relative}
+.cartao.forte{background:var(--limao)}
+.cartao-info{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin-top:12px}
+.cartao-num{font-family:var(--serif);font-size:34px;line-height:1}
+.cartao-rotulo{font-family:var(--cursiva);font-size:24px;color:var(--uva)}
+.cartao-titulo{width:100%;font-weight:600;font-size:16px;line-height:1.3}
+.cartao-meta{width:100%;font-family:var(--mao);font-size:15px}
+.selo-res{position:absolute;top:-14px;right:-10px;z-index:4;background:var(--uva);color:var(--branco);font-family:var(--mao);font-size:16px;padding:6px 12px;border:var(--borda);transform:rotate(4deg);box-shadow:3px 3px 0 var(--preto)}
+
+/* ---------- vídeos ---------- */
+.vid{position:relative;aspect-ratio:9/16;background:#e9e5d8;overflow:hidden;border:var(--borda)}
+.vid video{width:100%;height:100%;object-fit:cover;background:#222}
+.vid:not(.vazio){cursor:pointer}
+.vid .play{position:absolute;right:10px;bottom:10px;width:40px;height:40px;border-radius:50%;background:var(--branco);border:var(--borda);display:grid;place-items:center;font-size:14px;pointer-events:none}
+.vid.vazio{border-style:dashed}
+.vid.vazio .lacuna{border:none}
+
+/* ---------- nichos ---------- */
+.nichos{padding:80px 0}
+.nichos .titulo{text-align:center;margin-bottom:12px;transform-origin:center}
+.abas{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:34px}
+.aba{font-family:var(--mao);font-size:16px;background:var(--branco);border:var(--borda);padding:8px 16px;border-radius:0}
+.aba[aria-selected=true]{background:var(--lilas);box-shadow:3px 3px 0 var(--preto)}
+.aviso{text-align:center;font-size:14px;color:var(--uva);margin-bottom:18px}
+.grade-videos{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.item-nicho .legenda{margin-top:8px;font-size:15px;line-height:1.3}
+.item-nicho .legenda .mao{display:block;font-size:14px;color:#3a3a3a}
+
+/* ---------- depoimentos ---------- */
+.depoimentos{background:var(--oliva);color:var(--branco);padding:80px 0;border-block:var(--borda)}
+.depoimentos .titulo{text-align:center;margin-bottom:50px;transform-origin:center}
+.depoimentos .titulo .cursiva{color:var(--limao);font-size:1.1em}
+.elogios{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start}
+.elogio{background:var(--creme);color:var(--preto);border:var(--borda);box-shadow:6px 6px 0 var(--limao);padding:22px;min-height:220px;display:flex;flex-direction:column}
+.elogio:nth-child(2){transform:rotate(1.8deg)}
+.elogio blockquote{font-family:var(--serif);font-size:22px;line-height:1.25;flex:1}
+.elogio .quem{margin-top:16px;font-family:var(--mao);font-size:16px}
+.elogio .quem span{display:block;font-family:var(--texto);font-size:14px;color:#3a3a3a}
+.elogio .lacuna{min-height:170px}
+.marcas-lista{margin-top:56px;text-align:center}
+.marcas-lista h3{font-family:var(--mao);font-weight:400;font-size:18px;color:var(--limao);margin-bottom:16px}
+.marcas-lista ul{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.marcas-lista li{background:var(--branco);color:var(--preto);border:var(--borda);padding:6px 14px;font-family:var(--mao);font-size:16px}
+.marcas-lista li img{height:26px;width:auto}
+.marcas-lista .lacuna{max-width:560px;margin:0 auto;min-height:0}
+
+/* ---------- contato ---------- */
+.contato{padding:90px 0 70px}
+.contato-topo{text-align:center;margin-bottom:34px}
+.contato-topo .titulo{font-size:clamp(36px,6vw,44px);transform-origin:center}
+.contato-topo .titulo .cursiva{color:var(--oliva);font-size:1.15em}
+.contato-topo p{margin-top:18px;font-size:16px}
+.contato-botoes{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-bottom:54px}
+.contato-botoes .botao{font-size:19px;padding:14px 26px}
+.orcamento{max-width:720px;margin:0 auto 60px;background:var(--branco);border:var(--borda);box-shadow:4px 4px 0 var(--preto);padding:28px}
+.orcamento h3{font-family:var(--serif);font-weight:400;text-transform:uppercase;font-size:28px;margin-bottom:4px}
+.orcamento > p{font-size:15px;margin-bottom:18px}
+.campos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.campo label{display:block;font-family:var(--mao);font-size:16px;margin-bottom:4px}
+.campo input{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:var(--borda);background:var(--creme);border-radius:0}
+.campo.largo{grid-column:1/-1}
+.escondido{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+.orcamento .botao{margin-top:18px}
+.form-msg{margin-top:14px;font-size:15px}
+.form-ok{text-align:center;padding:20px 0}
+.form-ok strong{display:block;font-family:var(--cursiva);font-weight:400;font-size:40px;color:var(--oliva)}
+.duvidas{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:var(--largura);margin:0 auto}
+.duvida{border:var(--borda);padding:18px;background:var(--branco)}
+.duvida:nth-child(odd){background:var(--lilas)}
+.duvida h4{font-family:var(--mao);font-weight:400;font-size:18px;margin-bottom:6px;line-height:1.2}
+.duvida p{font-size:15px}
+.duvida .lacuna{min-height:70px}
+
+.rodape{background:var(--oliva);color:var(--branco);text-align:center;padding:36px 16px 90px;border-top:var(--borda)}
+.rodape .cursiva{display:block;color:var(--limao);font-size:40px;line-height:1.1}
+.rodape p{font-family:var(--mao);font-size:16px;margin-top:6px}
+
+/* ---------- WhatsApp fixo ---------- */
+.zap-fixo{position:fixed;right:16px;bottom:16px;z-index:70;width:52px;height:52px;border-radius:50%;background:var(--limao);border:var(--borda);box-shadow:3px 3px 0 var(--preto);display:grid;place-items:center;text-decoration:none}
+.zap-fixo svg{width:26px;height:26px}
+
+/* ---------- player ---------- */
+.player{position:fixed;inset:0;z-index:100;background:rgba(17,17,17,.86);display:flex;align-items:center;justify-content:center;padding:20px}
+.player[hidden]{display:none}
+.player-caixa{position:relative;height:min(88vh,860px);aspect-ratio:9/16;max-width:100%}
+.player video{width:100%;height:100%;object-fit:contain;background:#000;border:var(--borda)}
+.player-fechar{position:absolute;top:-14px;right:-14px;width:44px;height:44px;border-radius:50%;background:var(--limao);border:var(--borda);font-size:22px;line-height:1;z-index:2}
+
+/* ---------- responsivo ---------- */
+@media (max-width:980px){
+  .menu-links{gap:14px;font-size:15px}
+  .grade-videos{grid-template-columns:repeat(3,1fr)}
+  .duvidas{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:860px){
+  .menu-links{display:none}
+  .menu-abrir{display:inline-block}
+  .menu.aberto .menu-links{display:flex;flex-direction:column;gap:0;position:absolute;left:32px;right:32px;top:100%;background:var(--branco);border:var(--borda);border-top:0;color:var(--preto)}
+  .menu.aberto .menu-links a{display:block;padding:12px 18px;border-top:1px solid #ddd}
+  .menu-direita{display:flex;gap:8px;align-items:center}
+  .capa-grade{grid-template-columns:1fr;gap:56px;padding-bottom:110px}
+  .fotos{max-width:320px;margin:0 auto}
+  .sobre-grade{grid-template-columns:1fr;gap:44px}
+  .sobre-foto-area{max-width:400px;margin:0 auto;width:100%}
+  .seta{display:none}
+  .elogios{grid-template-columns:1fr}
+  .elogio:nth-child(2){transform:rotate(1deg)}
+  .fileira{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:18px;padding:6px 6px 18px;align-items:flex-end;-webkit-overflow-scrolling:touch}
+  .fileira .cartao{flex:0 0 62%;scroll-snap-align:center}
+  .fileira .cartao.forte{flex-basis:72%}
+}
+@media (max-width:520px){
+  .envelope,.menu,.capa-grade,.faixa-dica{padding-left:16px;padding-right:16px}
+  .menu.aberto .menu-links{left:16px;right:16px}
+  .menu-barra{padding:8px 8px 8px 12px;gap:8px}
+  .logo{font-size:17px}
+  .pilula{font-size:14px;padding:6px 10px}
+  .menu-abrir{font-size:14px;padding:5px 8px}
+  .capa-grade{padding-top:40px}
+  .capa-frase{font-size:17px}
+  .provas{gap:16px}
+  .provas strong{font-size:28px}
+  .fotos{max-width:260px}
+  .selo-brilho{width:92px;height:92px;left:-20px;bottom:-26px}
+  .selo-brilho .b{font-size:32px}
+  .sobre-foto-area{padding-left:38px}
+  .vertical{font-size:23px}
+  .grade-videos{grid-template-columns:repeat(2,1fr);gap:14px}
+  .fileira .cartao{flex-basis:76%}
+  .fileira .cartao.forte{flex-basis:82%}
+  .campos{grid-template-columns:1fr}
+  .orcamento{padding:20px}
+  .duvidas{grid-template-columns:1fr}
+  .faixa-item{font-size:20px}
+  .player{padding:12px}
+  .player-fechar{top:6px;right:6px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .faixa-trilho{width:auto;flex-wrap:wrap;justify-content:center}
+  .faixa-trilho .faixa-item[aria-hidden=true]{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- 1. CAPA -->
+<header class="capa" id="topo">
+  <nav class="menu" id="menu" aria-label="Menu principal"></nav>
+  <div class="capa-grade">
+    <div class="capa-texto">
+      <div class="pombo"><span class="emoji" aria-hidden="true">🕊️</span><span class="cursiva">me chama!</span></div>
+      <p class="capa-pre">A UGC creator <span class="cursiva">por trás de</span></p>
+      <h1 class="capa-nome" id="capa-nome"></h1>
+      <p class="capa-nichos" id="capa-nichos"></p>
+      <p class="capa-frase" id="capa-frase"></p>
+      <div class="capa-botoes">
+        <a class="botao" href="#destaques">Ver meus melhores vídeos</a>
+        <a class="botao" href="#contato">Falar comigo</a>
+      </div>
+      <ul class="provas" id="provas"></ul>
+    </div>
+    <div class="fotos">
+      <div class="foto-moldura foto-tras"><div class="quadro" id="foto-tras"></div></div>
+      <div class="foto-moldura foto-frente">
+        <div class="quadro" id="foto-capa"></div>
+        <div class="selo-brilho" role="img" aria-label="Selo Brilho: aluna Rafa Chagas">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <defs><path id="circulo-selo" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+            <circle cx="60" cy="60" r="58" fill="#DCCDF6" stroke="#111" stroke-width="1.2"/>
+            <text font-family="Patrick Hand SC, cursive" font-size="14" fill="#111"><textPath href="#circulo-selo" textLength="272" lengthAdjust="spacing">BRILHO ✿ ALUNA RAFA CHAGAS ✿</textPath></text>
+          </svg>
+          <span class="b" aria-hidden="true">b</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <svg class="onda" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,35 C120,70 240,0 360,35 C480,70 600,0 720,35 C840,70 960,0 1080,35 C1200,70 1320,0 1440,35 L1440,70 L0,70 Z" fill="#F8F6F0"/></svg>
+</header>
+<nav class="menu menu-fixo" id="menu-fixo" aria-label="Menu fixo" aria-hidden="true"></nav>
+
+<main>
+<!-- 2. SOBRE MIM -->
+<section class="sobre" id="sobre">
+  <div class="envelope">
+    <div class="sobre-topo">
+      <h2 class="titulo" id="sobre-titulo"></h2>
+      <p id="sobre-linha"></p>
+    </div>
+    <div class="sobre-grade">
+      <div class="sobre-foto-area">
+        <span class="vertical" aria-hidden="true">que bom que você veio!</span>
+        <div class="postal"><div class="quadro" id="foto-sobre"></div></div>
+        <svg class="seta" viewBox="0 0 80 70" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6,58 C14,30 30,50 38,30 C44,16 30,10 30,22 C30,36 56,30 70,14"/><path d="M58,12 L71,13 L68,26"/></svg>
+      </div>
+      <div class="sobre-texto">
+        <h3 class="titulo" id="sobre-frase"></h3>
+        <div class="corpo" id="sobre-corpo"></div>
+        <ul class="diferenciais" id="diferenciais"></ul>
+        <p class="selo-metodo">✦ Formada no Método Profissão do Futuro · aluna da Rafa Chagas</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- faixa de marcas (rolando) -->
+<div class="faixa" id="faixa" aria-label="Marcas que já atendi"></div>
+<div class="faixa-dica" id="faixa-dica" hidden></div>
+
+<!-- 3. DESTAQUES -->
+<section class="destaques" id="destaques">
+  <div class="envelope">
+    <h2 class="titulo">Meus destaques <span class="cursiva">(os melhores)</span></h2>
+    <p class="sub">clique no vídeo pra ver com som</p>
+    <div class="fileira" id="fileira"></div>
+  </div>
+</section>
+
+<!-- 4. CONTEÚDO POR NICHOS -->
+<section class="nichos" id="nichos">
+  <div class="envelope">
+    <h2 class="titulo">Conteúdo por nichos</h2>
+    <p class="sub">escolha o nicho da sua marca</p>
+    <div class="abas" role="tablist" id="abas"></div>
+    <div id="paineis"></div>
+  </div>
+</section>
+
+<!-- 5. O QUE AS MARCAS FALAM -->
+<section class="depoimentos" id="depoimentos">
+  <div class="envelope">
+    <h2 class="titulo">O que as marcas <span class="cursiva">falam</span></h2>
+    <div class="elogios" id="elogios"></div>
+    <div class="marcas-lista">
+      <h3>marcas que já atendi</h3>
+      <div id="marcas-lista"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CONTATO -->
+<section class="contato" id="contato">
+  <div class="envelope">
+    <div class="contato-topo">
+      <h2 class="titulo">Bora trabalhar <span class="cursiva">juntas?</span></h2>
+      <p>Me conta da sua marca e do produto: eu volto com ideia de roteiro e orçamento.</p>
+    </div>
+    <div class="contato-botoes" id="contato-botoes"></div>
+    <div id="form-area"></div>
+    <div class="duvidas" id="duvidas"></div>
+  </div>
+</section>
+</main>
+
+<footer class="rodape">
+  <span class="cursiva" id="rodape-nome"></span>
+  <p>UGC creator · aluna da Rafa Chagas</p>
+</footer>
+
+<a class="zap-fixo" id="zap-fixo" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4a.5.5 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.7 11.7 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.5-.3Z"/></svg>
+</a>
+
+<!-- player grande -->
+<div class="player" id="player" hidden role="dialog" aria-modal="true" aria-label="Vídeo">
+  <div class="player-caixa">
+    <button class="player-fechar" id="player-fechar" aria-label="Fechar vídeo">✕</button>
+    <video id="player-video" controls playsinline></video>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   MOTOR DA PÁGINA: monta tudo a partir do objeto DADOS (lá no fim).
+   Você não precisa mexer aqui: troque só o DADOS.
+   ===================================================================== */
+const $ = (s, el = document) => el.querySelector(s);
+const esc = (t) => String(t ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const slug = (t) => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+const semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const temMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const linkExterno = (s) => /instagram\.com|tiktok\.com|drive\.google|youtu/i.test(s || '');
+const caminho = (s) => (/%/.test(s) ? s : encodeURI(s));
+
+function lacuna(icone, dica, arquivo) {
+  return `<div class="lacuna"><span class="icone" aria-hidden="true">${icone}</span><span>${esc(dica)}</span>${arquivo ? `<code>${esc(arquivo)}</code>` : ''}</div>`;
+}
+function lacunaTexto(dica) { return `<span class="lacuna-texto">${esc(dica)}</span>`; }
+
+/* ---------- links de contato ---------- */
+function primeiroNome() { return (DADOS.nome || '').trim().split(/\s+/)[0] || ''; }
+function mensagemPronta() { return `Oi, ${primeiroNome()}! Vi seu portfólio e quero conversar sobre vídeos pra minha marca.`; }
+function linkZap() {
+  let n = String(DADOS.whatsapp || '').replace(/\D/g, '');
+  if (!n) return '';
+  if (!(n.startsWith('55') && n.length >= 12)) n = '55' + n;
+  return `https://wa.me/${n}?text=${encodeURIComponent(mensagemPronta())}`;
+}
+function linkEmail() {
+  if (!DADOS.email) return '';
+  return `mailto:${DADOS.email}?subject=${encodeURIComponent('Orçamento de vídeos UGC')}&body=${encodeURIComponent(mensagemPronta())}`;
+}
+function linkContato() { return linkZap() || linkEmail(); }
+function linkInsta() { const u = String(DADOS.instagram || '').replace(/^@/, '').trim(); return u ? `https://instagram.com/${u}` : ''; }
+
+/* ---------- fotos (com lacuna se o arquivo não existir) ---------- */
+function montarFoto(box, src, dica, alt) {
+  const vazio = () => { box.innerHTML = lacuna('📷', dica, src || 'midia/...jpg'); };
+  if (!src) return vazio();
+  const img = new Image();
+  img.alt = alt || '';
+  img.decoding = 'async';
+  img.onerror = vazio;
+  img.src = caminho(src);
+  box.innerHTML = '';
+  box.appendChild(img);
+}
+
+/* ---------- vídeos ---------- */
+let videoAuto = null;
+function montarVideo(box, { src, titulo, capa, dica, auto }) {
+  const falhou = (msg) => {
+    box.classList.add('vazio');
+    box.removeAttribute('role'); box.removeAttribute('tabindex'); box.removeAttribute('aria-label');
+    box.innerHTML = lacuna('🎬', msg || dica, src && !linkExterno(src) ? src : '');
+    box.dispatchEvent(new CustomEvent('falhou', { bubbles: true }));
+  };
+  if (!src) return falhou();
+  if (linkExterno(src)) {
+    console.warn('Link de Reels/TikTok/Drive não toca na página. Exporte o .mp4 e coloque na pasta midia:', src);
+    return falhou('Link de rede social não toca aqui: baixe o .mp4 e coloque na pasta midia');
+  }
+  const v = document.createElement('video');
+  v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'metadata';
+  v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('loop', '');
+  if (capa) v.poster = caminho(capa);
+  if (auto && !semMovimento) v.setAttribute('autoplay', '');
+  v.addEventListener('error', () => falhou());
+  v.src = caminho(src) + '#t=0.1';
+  box.innerHTML = '';
+  box.appendChild(v);
+  box.insertAdjacentHTML('beforeend', '<span class="play" aria-hidden="true">▶</span>');
+  box.setAttribute('role', 'button');
+  box.setAttribute('tabindex', '0');
+  box.setAttribute('aria-label', 'Abrir vídeo' + (titulo ? ': ' + titulo : ''));
+
+  if (auto && !semMovimento) {
+    videoAuto = v;
+    new IntersectionObserver(([e]) => {
+      if ($('#player').hidden === false) return;
+      e.isIntersecting ? v.play().catch(() => {}) : v.pause();
+    }, { threshold: 0.35 }).observe(box);
+  } else if (temMouse) {
+    box.addEventListener('mouseenter', () => v.play().catch(() => {}));
+    box.addEventListener('mouseleave', () => v.pause());
+  }
+  const abrir = () => { if (!box.classList.contains('vazio')) abrirPlayer(src, titulo || src.split('/').pop().replace(/\.mp4$/i, '')); };
+  box.addEventListener('click', abrir);
+  box.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(); } });
+}
+
+/* ---------- player grande ---------- */
+let focoAntes = null;
+function abrirPlayer(src, titulo) {
+  const p = $('#player'), v = $('#player-video');
+  focoAntes = document.activeElement;
+  document.querySelectorAll('video').forEach(x => { if (x !== v) x.pause(); });
+  v.src = caminho(src);
+  v.muted = false;
+  p.hidden = false;
+  document.body.style.overflow = 'hidden';
+  v.play().catch(() => {});
+  $('#player-fechar').focus();
+  medirVideo(titulo);
+}
+function fecharPlayer() {
+  const p = $('#player'), v = $('#player-video');
+  if (p.hidden) return;
+  v.pause(); v.removeAttribute('src'); v.load();
+  p.hidden = true;
+  document.body.style.overflow = '';
+  if (focoAntes) focoAntes.focus({ preventScroll: true });
+  if (videoAuto) {
+    const r = videoAuto.getBoundingClientRect();
+    if (r.bottom > 0 && r.top < innerHeight) videoAuto.play().catch(() => {});
+  }
+}
+
+/* ---------- métricas (Umami): só acessos e vídeos mais vistos ---------- */
+function ligarUmami() {
+  if (!DADOS.umami) return;
+  const s = document.createElement('script');
+  s.src = 'https://cloud.umami.is/script.js';
+  s.defer = true;
+  s.setAttribute('data-website-id', DADOS.umami);
+  document.head.appendChild(s);
+}
+function medirVideo(titulo) {
+  try {
+    if (window.umami && typeof window.umami.track === 'function') {
+      window.umami.track(('video-' + slug(titulo)).slice(0, 50));
+    }
+  } catch (e) { /* a métrica nunca quebra a página */ }
+}
+
+/* ---------- montagem das seções ---------- */
+function montarMenu() {
+  const nome = (DADOS.nome || 'Seu Nome').trim().split(/\s+/);
+  const logo = `${esc(nome[0])}<span>✦</span>${esc(nome.length > 1 ? nome[nome.length - 1] : '')}`;
+  const links = [['#sobre','Sobre mim'],['#destaques','Destaques'],['#nichos','Nichos'],['#depoimentos','O que as marcas falam'],['#contato','Contato']];
+  const html = (id) => `
+    <div class="menu-barra">
+      <a class="logo" href="#topo">${logo}</a>
+      <ul class="menu-links" id="${id}-links">${links.map(([h, t]) => `<li><a href="${h}">${t}</a></li>`).join('')}</ul>
+      <div class="menu-direita">
+        <a class="pilula" href="#contato">fale comigo</a>
+        <button class="menu-abrir" type="button" aria-expanded="false" aria-controls="${id}-links">menu</button>
+      </div>
+    </div>`;
+  const m = $('#menu'), f = $('#menu-fixo');
+  m.innerHTML = html('menu'); f.innerHTML = html('menufixo');
+  [m, f].forEach(nav => {
+    const b = $('.menu-abrir', nav);
+    b.addEventListener('click', () => { const ab = nav.classList.toggle('aberto'); b.setAttribute('aria-expanded', ab); });
+    nav.querySelectorAll('.menu-links a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('aberto'); b.setAttribute('aria-expanded', 'false'); }));
+  });
+  // o menu fixo aparece quando a capa sai da tela
+  new IntersectionObserver(([e]) => {
+    f.classList.toggle('visivel', !e.isIntersecting);
+    f.setAttribute('aria-hidden', e.isIntersecting);
+    f.querySelectorAll('a,button').forEach(x => x.tabIndex = e.isIntersecting ? -1 : 0);
+    if (e.isIntersecting) f.classList.remove('aberto');
+  }).observe(m);
+}
+
+function montarCapa() {
+  $('#capa-nome').innerHTML = esc(DADOS.nome || 'Seu nome').replace(/\s+/, '<br>');
+  $('#capa-nichos').innerHTML = DADOS.nichosResumo ? 'UGC creator de ' + esc(DADOS.nichosResumo) : lacunaTexto('UGC creator de [seus nichos]');
+  $('#capa-frase').textContent = DADOS.frase || '';
+  $('#provas').innerHTML = (DADOS.provas || []).slice(0, 3).map(p => `<li><strong>${esc(p.numero)}</strong><span>${esc(p.texto)}</span></li>`).join('');
+  montarFoto($('#foto-capa'), DADOS.fotoCapa, 'Retrato com rosto, luz natural e ambiente real. Sem selfie: a capa mostra o seu nível', `Foto de ${DADOS.nome}`);
+  montarFoto($('#foto-tras'), DADOS.fotoSobre, 'Segunda foto (a mesma do Sobre mim)', '');
+}
+
+function montarSobre() {
+  $('#sobre-titulo').textContent = `Prazer, ${primeiroNome() || 'seu nome'}`;
+  $('#sobre-linha').textContent = DADOS.nichosResumo ? `sou a ${primeiroNome()} e crio vídeos UGC pra marcas de ${DADOS.nichosResumo}` : '';
+  // título a partir da frase: "Conteúdo que parece conversa" / "e vende como anúncio"
+  const frase = DADOS.frase || '';
+  const i = frase.toLowerCase().indexOf(' e ');
+  if (i > 0) {
+    const l1 = frase.slice(0, i).trim().split(' '), ult = l1.pop();
+    $('#sobre-frase').innerHTML = `${esc(l1.join(' '))} <span class="cursiva">${esc(ult)}</span><br><span class="marca-texto">${esc(frase.slice(i + 1))}</span>`;
+  } else {
+    $('#sobre-frase').textContent = frase;
+  }
+  const t = (DADOS.sobreTexto || '').trim();
+  $('#sobre-corpo').innerHTML = t
+    ? t.split(/\n\s*\n/).map(p => `<p>${esc(p)}</p>`).join('')
+    : lacuna('✍️', 'Escreva 3 a 4 frases em primeira pessoa: quem você é, onde mora, sua rotina e por que as marcas do seu nicho combinam com você.', 'DADOS.sobreTexto');
+  $('#diferenciais').innerHTML = (DADOS.diferenciais || []).map((d, n) => `<li><span class="num">${String(n + 1).padStart(2, '0')}</span><span>${esc(d)}</span></li>`).join('');
+  montarFoto($('#foto-sobre'), DADOS.fotoSobre, 'Você no dia a dia: gravando, na rotina, com produto na mão', `${DADOS.nome} no dia a dia`);
+}
+
+function montarFaixa() {
+  const marcas = (DADOS.marcas || []).filter(m => m && (m.nome || m.logo));
+  const lemas = ['agenda aberta', 'vídeo que vende', 'brilho da rafa', 'parece conversa', 'vende como anúncio', 'entrega rápida'];
+  const itens = marcas.length
+    ? marcas.map(m => m.logo ? `<img src="${esc(caminho(m.logo))}" alt="${esc(m.nome)}" data-nome="${esc(m.nome)}">` : esc(m.nome))
+    : lemas.map(esc);
+  const bloco = (oculto) => `<div class="faixa-item"${oculto ? ' aria-hidden="true"' : ''}>${itens.map(x => `<span>${x}</span><span class="flor" aria-hidden="true">✿</span>`).join('')}</div>`;
+  // repete pra rolar sem emenda
+  $('#faixa').innerHTML = `<div class="faixa-trilho">${bloco(false)}${bloco(true)}${bloco(true)}${bloco(true)}</div>`;
+  $('#faixa').querySelectorAll('img').forEach(img => img.onerror = () => { img.replaceWith(document.createTextNode(img.dataset.nome || '')); });
+  if (!marcas.length) {
+    const d = $('#faixa-dica');
+    d.hidden = false;
+    d.innerHTML = lacuna('🏷️', 'Faixa de marcas: escreva os nomes das marcas que você já atendeu em DADOS.marcas (ou coloque os logos em', 'midia/logos)');
+  }
+}
+
+const ROTULOS = ['o mais forte', 'queridinho', 'viralizou'];
+function montarDestaques() {
+  const f = $('#fileira');
+  const lista = (DADOS.destaques || []).slice(0, 3);
+  while (lista.length < 3) lista.push({});
+  f.innerHTML = lista.map((d, n) => {
+    const meta = [d.nicho, d.formato].filter(Boolean).map(esc).join(' · ');
+    return `<article class="cartao${n === 0 ? ' forte' : ''}">
+      ${d.res ? `<span class="selo-res">✦ ${esc(d.res)}</span>` : ''}
+      <div class="vid" data-i="${n}"></div>
+      <div class="cartao-info">
+        <span class="cartao-num">${String(n + 1).padStart(2, '0')}</span>
+        <span class="cartao-rotulo">${ROTULOS[n]}</span>
+        <span class="cartao-titulo">${d.titulo ? esc(d.titulo) : lacunaTexto('título curto do vídeo')}</span>
+        <span class="cartao-meta">${meta || lacunaTexto('nicho · formato (ADS, review, unboxing, tutorial, nativo)')}</span>
+      </div>
+    </article>`;
+  }).join('');
+  f.querySelectorAll('.vid').forEach(box => {
+    const n = +box.dataset.i, d = lista[n];
+    montarVideo(box, {
+      src: d.video, titulo: d.titulo || `destaque-${n + 1}`, capa: d.capa, auto: n === 0,
+      dica: 'Os melhores na frente, não os mais recentes' + (n === 0 ? ' (aqui vai o mais forte)' : '')
+    });
+  });
+}
+
+function montarNichos() {
+  const abas = $('#abas'), paineis = $('#paineis');
+  const nichos = DADOS.nichos || [];
+  abas.innerHTML = nichos.map((n, i) => `<button class="aba" role="tab" type="button" id="aba-${slug(n.nome)}" aria-controls="painel-${slug(n.nome)}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-c="${slug(n.nome)}">${esc(n.nome)}</button>`).join('');
+  paineis.innerHTML = nichos.map((n, i) => `<div role="tabpanel" id="painel-${slug(n.nome)}" aria-labelledby="aba-${slug(n.nome)}" ${i === 0 ? '' : 'hidden'}>
+      <p class="aviso" hidden>mínimo 3 vídeos: com menos, tire o nicho</p>
+      <div class="grade-videos">${(n.videos || []).map((v, j) => `<div class="item-nicho"><div class="vid" data-n="${i}" data-j="${j}"></div>
+        <p class="legenda">${v.titulo ? esc(v.titulo) : lacunaTexto('título do vídeo')}${v.formato ? `<span class="mao">${esc(v.formato)}</span>` : ''}</p></div>`).join('')}</div>
+    </div>`).join('');
+
+  paineis.querySelectorAll('[role=tabpanel]').forEach((painel, i) => {
+    const total = (nichos[i].videos || []).length;
+    let falhas = 0;
+    const atualiza = () => { $('.aviso', painel).hidden = total - falhas >= 3; };
+    painel.addEventListener('falhou', () => { falhas++; atualiza(); });
+    atualiza();
+  });
+  paineis.querySelectorAll('.vid').forEach(box => {
+    const n = nichos[+box.dataset.n], v = n.videos[+box.dataset.j];
+    montarVideo(box, { src: v.video, titulo: v.titulo || `${slug(n.nome)}-${+box.dataset.j + 1}`, capa: v.capa, dica: `Vídeo de ${n.nome}: coloque o .mp4 em` });
+  });
+
+  const botoes = [...abas.querySelectorAll('.aba')];
+  const ativar = (c, focar) => {
+    botoes.forEach(b => {
+      const sim = b.dataset.c === c;
+      b.setAttribute('aria-selected', sim); b.tabIndex = sim ? 0 : -1;
+      $('#painel-' + b.dataset.c).hidden = !sim;
+      if (sim && focar) b.focus();
+    });
+    paineis.querySelectorAll('[role=tabpanel][hidden] video').forEach(v => v.pause());
+  };
+  botoes.forEach((b, i) => {
+    b.addEventListener('click', () => {
+      ativar(b.dataset.c);
+      try { const u = new URL(location.href); u.searchParams.set('c', b.dataset.c); history.replaceState(null, '', u); } catch (e) {}
+    });
+    b.addEventListener('keydown', (e) => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (d) { const alvo = botoes[(i + d + botoes.length) % botoes.length]; ativar(alvo.dataset.c, true); }
+    });
+  });
+  // link com ?c=nome-do-nicho abre direto na aba e rola até a seção
+  const c = slug(new URLSearchParams(location.search).get('c'));
+  if (c && botoes.some(b => b.dataset.c === c)) {
+    ativar(c);
+    requestAnimationFrame(() => setTimeout(() => $('#nichos').scrollIntoView({ behavior: semMovimento ? 'auto' : 'smooth' }), 150));
+  }
+}
+
+function montarElogios() {
+  const lista = (DADOS.elogios || []).slice(0, 3);
+  while (lista.length < 3) lista.push({});
+  $('#elogios').innerHTML = lista.map(e => e.texto
+    ? `<figure class="elogio"><blockquote>“${esc(e.texto)}”</blockquote><figcaption class="quem">${esc(e.marca)}${e.detalhe ? `<span>${esc(e.detalhe)}</span>` : ''}</figcaption></figure>`
+    : `<div class="elogio">${lacuna('💬', 'cole aqui a frase ou o print real da marca', 'DADOS.elogios')}</div>`
+  ).join('');
+  const marcas = (DADOS.marcas || []).filter(m => m && (m.nome || m.logo));
+  $('#marcas-lista').innerHTML = marcas.length
+    ? `<ul>${marcas.map(m => `<li>${m.logo ? `<img src="${esc(caminho(m.logo))}" alt="${esc(m.nome)}" data-nome="${esc(m.nome)}">` : esc(m.nome)}</li>`).join('')}</ul>`
+    : lacuna('🏷️', 'Liste aqui as marcas que você já atendeu', 'DADOS.marcas');
+  $('#marcas-lista').querySelectorAll('img').forEach(img => img.onerror = () => { img.replaceWith(document.createTextNode(img.dataset.nome || '')); });
+}
+
+function botaoContatoHTML(classe) {
+  if (linkZap()) return `<a class="botao ${classe}" href="${esc(linkZap())}" target="_blank" rel="noopener">💬 Chamar no WhatsApp</a>`;
+  if (linkEmail()) return `<a class="botao ${classe}" href="${esc(linkEmail())}">✉️ Mandar e-mail</a>`;
+  return '';
+}
+
+function montarContato() {
+  const insta = linkInsta();
+  $('#contato-botoes').innerHTML = botaoContatoHTML('limao') +
+    (insta ? `<a class="botao branco" href="${esc(insta)}" target="_blank" rel="noopener">📸 Instagram ${esc('@' + String(DADOS.instagram).replace(/^@/, ''))}</a>` : '');
+  const zf = $('#zap-fixo');
+  if (linkContato()) { zf.href = linkContato(); if (!linkZap()) zf.setAttribute('aria-label', 'Mandar e-mail'); } else zf.remove();
+
+  if (DADOS.formspree) {
+    $('#form-area').innerHTML = `<form class="orcamento" id="orcamento" novalidate>
+      <h3>Pedir orçamento</h3>
+      <p>Leva 1 minuto. Eu respondo no seu WhatsApp.</p>
+      <div class="campos">
+        <div class="campo"><label for="f-nome">Seu nome</label><input id="f-nome" name="nome" required autocomplete="name"></div>
+        <div class="campo"><label for="f-empresa">Sua marca ou empresa</label><input id="f-empresa" name="empresa" required autocomplete="organization"></div>
+        <div class="campo"><label for="f-produto">Qual produto entra no vídeo?</label><input id="f-produto" name="produto" required></div>
+        <div class="campo"><label for="f-prazo">Pra quando você precisa?</label><input id="f-prazo" name="prazo" required placeholder="ex.: até dia 20"></div>
+        <div class="campo largo"><label for="f-zap">Seu WhatsApp</label><input id="f-zap" name="whatsapp" type="tel" required autocomplete="tel" inputmode="tel" placeholder="(11) 90000-0000"></div>
+      </div>
+      <input class="escondido" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="botao limao" type="submit">Quero meu orçamento</button>
+      <div class="form-msg" id="form-msg" role="status"></div>
+    </form>`;
+    const form = $('#orcamento');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = $('#form-msg');
+      if (!form.checkValidity()) { msg.textContent = 'Preenche todos os campos, por favor 🙂'; form.querySelector(':invalid').focus(); return; }
+      const btn = form.querySelector('button[type=submit]');
+      btn.disabled = true; btn.textContent = 'Enviando...';
+      try {
+        const r = await fetch(DADOS.formspree, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+        if (!r.ok) throw new Error(r.status);
+        form.outerHTML = `<div class="orcamento form-ok" role="status"><strong>Recebi! Te chamo em breve.</strong></div>`;
+      } catch (err) {
+        btn.disabled = false; btn.textContent = 'Quero meu orçamento';
+        msg.innerHTML = `Não consegui enviar agora. Me chama direto por aqui: <br><br>${botaoContatoHTML('')}`;
+      }
+    });
+  }
+
+  $('#duvidas').innerHTML = (DADOS.duvidas || []).map(d => `<div class="duvida"><h4>${esc(d.pergunta)}</h4>${d.resposta ? `<p>${esc(d.resposta)}</p>` : lacuna('❓', 'escreva a sua resposta', 'DADOS.duvidas')}</div>`).join('');
+  $('#rodape-nome').textContent = DADOS.nome || '';
+}
+
+function iniciar() {
+  montarMenu(); montarCapa(); montarSobre(); montarFaixa(); montarDestaques(); montarNichos(); montarElogios(); montarContato();
+  ligarUmami();
+  $('#player-fechar').addEventListener('click', fecharPlayer);
+  $('#player').addEventListener('click', (e) => { if (e.target.id === 'player') fecharPlayer(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') fecharPlayer(); });
+}
+document.addEventListener('DOMContentLoaded', iniciar);
+
+
+/* =====================================================================
+   DADOS: É SÓ MEXER AQUI PRA TROCAR TUDO NA PÁGINA
+   - Texto vai entre aspas. Campo vazio ('') vira lacuna listrada com dica.
+   - Caminhos de foto/vídeo são relativos à pasta do index.html.
+   - Se o arquivo ainda não existir na pasta midia, a página mostra a lacuna
+     sozinha: quando você colocar o arquivo com o nome certo, ele aparece.
+   ===================================================================== */
+const DADOS = {
+  // Seu nome completo (aparece na capa, no menu, no rodapé e na mensagem do WhatsApp)
+  nome: 'Mariana Miranda',
+
+  // Seu @ do Instagram (com ou sem @)
+  instagram: '@eu.marimirandaa',
+
+  // WhatsApp com DDD, só números. Se deixar vazio, o botão vira e-mail.
+  whatsapp: '11974083990',
+
+  // E-mail de contato (usado se não tiver WhatsApp)
+  email: 'ctt.marimiranda@gmail.com',
+
+  // Endereço do site depois de publicado (ex.: 'https://marianamiranda.vercel.app').
+  // Lembre de trocar também o MEU-LINK nas tags og: lá no topo do arquivo.
+  site: '',
+
+  // Endereço do formulário do Formspree (ex.: 'https://formspree.io/f/abcdwxyz').
+  // Vazio = o formulário não aparece, o contato fica só com os botões.
+  formspree: '',
+
+  // ID do site no Umami (ex.: '1a2b3c4d-....'). Vazio = sem métricas.
+  umami: '',
+
+  // Seus nichos em uma linha (aparece como "UGC creator de ...")
+  nichosResumo: 'skincare, cabelo, moda, casa e decoração, comida, suplementos, tech e viagem',
+
+  // Frase do que você faz pela marca (capa, prévia do link e título do Sobre mim)
+  frase: 'Conteúdo que parece conversa e vende como anúncio',
+
+  // Os 3 números da capa
+  provas: [
+    { numero: '100+', texto: 'vídeos gravados' },
+    { numero: '30+', texto: 'marcas atendidas' },
+    { numero: '7 dias', texto: 'prazo de entrega' }
+  ],
+
+  // Suas fotos: retrato da capa e foto do dia a dia (Sobre mim)
+  fotoCapa: 'midia/capa.jpg',
+  fotoSobre: 'midia/sobre.jpg',
+
+  // Texto do Sobre mim, em primeira pessoa (quem você é, onde mora, rotina,
+  // por que as marcas do seu nicho combinam com você). Linha em branco = novo parágrafo.
+  sobreTexto: '',
+
+  // Seus 3 diferenciais
+  diferenciais: [
+    'Estudo a dor do cliente da marca antes de escrever qualquer coisa.',
+    'Roteiro meu, aprovado pela marca antes de gravar.',
+    'Edição pronta pra anúncio, com gancho forte e som tratado.'
+  ],
+
+  // Seus 3 MELHORES vídeos (não os mais recentes). O primeiro é o mais forte.
+  // titulo: nome curto | nicho | formato: ADS, review, unboxing, tutorial ou nativo
+  // video: arquivo .mp4 | capa: imagem opcional antes de tocar | res: resultado real (ex.: '116 vendas'), ou vazio
+  destaques: [
+    { titulo: '', nicho: '', formato: '', video: 'midia/destaques/1.mp4', capa: '', res: '' },
+    { titulo: '', nicho: '', formato: '', video: 'midia/destaques/2.mp4', capa: '', res: '' },
+    { titulo: '', nicho: '', formato: '', video: 'midia/destaques/3.mp4', capa: '', res: '' }
+  ],
+
+  // Uma aba por nicho. Cada nicho precisa de pelo menos 3 vídeos.
+  // Vídeos ficam em midia/nichos/NOME-DA-PASTA/. Pode acrescentar mais itens na lista.
+  // O link pra mandar nas plataformas é: seu-site/?c=nome-do-nicho (ex.: ?c=casa-e-decoracao)
+  nichos: [
+    { nome: 'skincare', videos: [
+      { titulo: '', formato: '', video: 'midia/nichos/skincare/1.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/skincare/2.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/skincare/3.mp4' } ] },
+    { nome: 'cabelo', videos: [
+      { titulo: '', formato: '', video: 'midia/nichos/cabelo/1.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/cabelo/2.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/cabelo/3.mp4' } ] },
+    { nome: 'moda', videos: [
+      { titulo: '', formato: '', video: 'midia/nichos/moda/1.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/moda/2.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/moda/3.mp4' } ] },
+    { nome: 'casa e decoração', videos: [
+      { titulo: '', formato: '', video: 'midia/nichos/casa-e-decoracao/1.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/casa-e-decoracao/2.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/casa-e-decoracao/3.mp4' } ] },
+    { nome: 'comida', videos: [
+      { titulo: '', formato: '', video: 'midia/nichos/comida/1.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/comida/2.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/comida/3.mp4' } ] },
+    { nome: 'suplementos', videos: [
+      { titulo: '', formato: '', video: 'midia/nichos/suplementos/1.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/suplementos/2.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/suplementos/3.mp4' } ] },
+    { nome: 'tech', videos: [
+      { titulo: '', formato: '', video: 'midia/nichos/tech/1.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/tech/2.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/tech/3.mp4' } ] },
+    { nome: 'viagem', videos: [
+      { titulo: '', formato: '', video: 'midia/nichos/viagem/1.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/viagem/2.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/viagem/3.mp4' } ] }
+  ],
+
+  // Depoimentos REAIS de marcas (nunca invente). texto: a frase | marca: nome | detalhe: contexto (ex.: 'campanha de lançamento, 2026')
+  elogios: [
+    { texto: '', marca: '', detalhe: '' },
+    { texto: '', marca: '', detalhe: '' },
+    { texto: '', marca: '', detalhe: '' }
+  ],
+
+  // Marcas que você já atendeu. logo é opcional (ex.: 'midia/logos/marca.png'); sem logo, aparece o nome.
+  // Exemplo: { nome: 'Marca X', logo: '' },
+  marcas: [],
+
+  // As 4 dúvidas do Contato. Resposta vazia = lacuna pra você preencher.
+  duvidas: [
+    { pergunta: 'Onde posso usar o conteúdo?', resposta: '' },
+    { pergunta: 'Por quanto tempo?', resposta: '' },
+    { pergunta: 'Tem exclusividade?', resposta: '' },
+    { pergunta: 'Qual o prazo?', resposta: 'Entrega em até 7 dias.' }
+  ]
+};
+</script>
+</body>
+</html>
