@@ -873,7 +873,7 @@ const DADOS = {
   umami: 'b48fa3b0-0521-43f1-ab1b-185eb85ffcce',
 
   // Seus nichos em uma linha (aparece como "UGC creator de ...")
-  nichosResumo: 'skincare, cabelo, moda, casa e decoração, comida, suplementos, tech e viagem',
+  nichosResumo: 'skincare, beleza, moda, casa & decoração, gastronomia, fitness & bem-estar, tech, viagem, bebidas & drinks e pet',
 
   // Frase do que você faz pela marca (capa, prévia do link e título do Sobre mim)
   frase: 'Conteúdo que parece conversa e vende como anúncio',
@@ -911,32 +911,32 @@ const DADOS = {
 
   // Uma aba por nicho. Cada nicho precisa de pelo menos 3 vídeos.
   // Vídeos ficam em midia/nichos/NOME-DA-PASTA/. Pode acrescentar mais itens na lista.
-  // O link pra mandar nas plataformas é: seu-site/?c=nome-do-nicho (ex.: ?c=casa-e-decoracao)
+  // O link pra mandar nas plataformas é: seu-site/?c=nome-do-nicho (ex.: ?c=casa-decoracao)
   nichos: [
     { nome: 'skincare', videos: [
       { titulo: '', formato: '', video: 'midia/nichos/skincare/1.mp4' },
       { titulo: '', formato: '', video: 'midia/nichos/skincare/2.mp4' },
       { titulo: '', formato: '', video: 'midia/nichos/skincare/3.mp4' } ] },
-    { nome: 'cabelo', videos: [
-      { titulo: '', formato: '', video: 'midia/nichos/cabelo/1.mp4' },
-      { titulo: '', formato: '', video: 'midia/nichos/cabelo/2.mp4' },
-      { titulo: '', formato: '', video: 'midia/nichos/cabelo/3.mp4' } ] },
+    { nome: 'beleza', videos: [
+      { titulo: '', formato: '', video: 'midia/nichos/beleza/1.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/beleza/2.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/beleza/3.mp4' } ] },
     { nome: 'moda', videos: [
       { titulo: '', formato: '', video: 'midia/nichos/moda/1.mp4' },
       { titulo: '', formato: '', video: 'midia/nichos/moda/2.mp4' },
       { titulo: '', formato: '', video: 'midia/nichos/moda/3.mp4' } ] },
-    { nome: 'casa e decoração', videos: [
-      { titulo: '', formato: '', video: 'midia/nichos/casa-e-decoracao/1.mp4' },
-      { titulo: '', formato: '', video: 'midia/nichos/casa-e-decoracao/2.mp4' },
-      { titulo: '', formato: '', video: 'midia/nichos/casa-e-decoracao/3.mp4' } ] },
-    { nome: 'comida', videos: [
-      { titulo: '', formato: '', video: 'midia/nichos/comida/1.mp4' },
-      { titulo: '', formato: '', video: 'midia/nichos/comida/2.mp4' },
-      { titulo: '', formato: '', video: 'midia/nichos/comida/3.mp4' } ] },
-    { nome: 'suplementos', videos: [
-      { titulo: '', formato: '', video: 'midia/nichos/suplementos/1.mp4' },
-      { titulo: '', formato: '', video: 'midia/nichos/suplementos/2.mp4' },
-      { titulo: '', formato: '', video: 'midia/nichos/suplementos/3.mp4' } ] },
+    { nome: 'casa & decoração', videos: [
+      { titulo: '', formato: '', video: 'midia/nichos/casa-decoracao/1.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/casa-decoracao/2.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/casa-decoracao/3.mp4' } ] },
+    { nome: 'gastronomia', videos: [
+      { titulo: '', formato: '', video: 'midia/nichos/gastronomia/1.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/gastronomia/2.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/gastronomia/3.mp4' } ] },
+    { nome: 'fitness & bem-estar', videos: [
+      { titulo: '', formato: '', video: 'midia/nichos/fitness-bem-estar/1.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/fitness-bem-estar/2.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/fitness-bem-estar/3.mp4' } ] },
     { nome: 'tech', videos: [
       { titulo: '', formato: '', video: 'midia/nichos/tech/1.mp4' },
       { titulo: '', formato: '', video: 'midia/nichos/tech/2.mp4' },
@@ -944,7 +944,15 @@ const DADOS = {
     { nome: 'viagem', videos: [
       { titulo: '', formato: '', video: 'midia/nichos/viagem/1.mp4' },
       { titulo: '', formato: '', video: 'midia/nichos/viagem/2.mp4' },
-      { titulo: '', formato: '', video: 'midia/nichos/viagem/3.mp4' } ] }
+      { titulo: '', formato: '', video: 'midia/nichos/viagem/3.mp4' } ] },
+    { nome: 'bebidas & drinks', videos: [
+      { titulo: '', formato: '', video: 'midia/nichos/bebidas-drinks/1.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/bebidas-drinks/2.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/bebidas-drinks/3.mp4' } ] },
+    { nome: 'pet', videos: [
+      { titulo: '', formato: '', video: 'midia/nichos/pet/1.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/pet/2.mp4' },
+      { titulo: '', formato: '', video: 'midia/nichos/pet/3.mp4' } ] }
   ],
 
   // Depoimentos REAIS de marcas (nunca invente). texto: a frase | marca: nome | detalhe: contexto (ex.: 'campanha de lançamento, 2026')
@@ -961,7 +969,7 @@ const DADOS = {
   // VERSÃO EM INGLÊS (botão BR / EN no menu). Campo vazio = aparece o texto em português.
   // Nomes de marcas, títulos dos vídeos e depoimentos ficam como estão (no idioma original).
   ingles: {
-    nichosResumo: 'skincare, hair, fashion, home & decor, food, supplements, tech and travel',
+    nichosResumo: 'skincare, beauty, fashion, home & decor, food, fitness & wellness, tech, travel, drinks and pets',
     // Mantenha o " and " na frase: é ele que divide o título do Sobre mim em duas linhas
     frase: 'Content that feels like a conversation and sells like an ad',
     provas: [
@@ -976,7 +984,7 @@ const DADOS = {
       'Ad-ready editing, with a strong hook and clean audio.'
     ],
     // Nomes das abas em inglês, na mesma ordem dos nichos lá em cima
-    nichos: ['skincare', 'hair', 'fashion', 'home & decor', 'food', 'supplements', 'tech', 'travel'],
+    nichos: ['skincare', 'beauty', 'fashion', 'home & decor', 'food', 'fitness & wellness', 'tech', 'travel', 'drinks', 'pet'],
     duvidas: [
       { pergunta: 'Where can I use the content?', resposta: '' },
       { pergunta: 'For how long?', resposta: '' },
