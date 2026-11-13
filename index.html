@@ -730,13 +730,13 @@ function montarContato() {
   if (DADOS.formspree) {
     $('#form-area').innerHTML = `<form class="orcamento" id="orcamento" novalidate>
       <h3>Pedir orçamento</h3>
-      <p>Leva 1 minuto. Eu respondo no seu WhatsApp.</p>
+      <p>Leva 1 minuto. Eu respondo por e-mail. Prefere WhatsApp? Use o botão “Chamar no WhatsApp” aqui em cima.</p>
       <div class="campos">
         <div class="campo"><label for="f-nome">Seu nome</label><input id="f-nome" name="nome" required autocomplete="name"></div>
         <div class="campo"><label for="f-empresa">Sua marca ou empresa</label><input id="f-empresa" name="empresa" required autocomplete="organization"></div>
         <div class="campo"><label for="f-produto">Qual produto entra no vídeo?</label><input id="f-produto" name="produto" required></div>
         <div class="campo"><label for="f-prazo">Pra quando você precisa?</label><input id="f-prazo" name="prazo" required placeholder="ex.: até dia 20"></div>
-        <div class="campo largo"><label for="f-zap">Seu WhatsApp</label><input id="f-zap" name="whatsapp" type="tel" required autocomplete="tel" inputmode="tel" placeholder="(11) 90000-0000"></div>
+        <div class="campo largo"><label for="f-email">Seu e-mail (é pra ele que eu respondo)</label><input id="f-email" name="email" type="email" required autocomplete="email" inputmode="email" placeholder="voce@suamarca.com.br"></div>
       </div>
       <input class="escondido" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button class="botao limao" type="submit">Quero meu orçamento</button>
@@ -746,7 +746,7 @@ function montarContato() {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const msg = $('#form-msg');
-      if (!form.checkValidity()) { msg.textContent = 'Preenche todos os campos, por favor 🙂'; form.querySelector(':invalid').focus(); return; }
+      if (!form.checkValidity()) { const inv = form.querySelector(':invalid'); msg.textContent = inv.validity.typeMismatch ? 'Confere o e-mail, por favor 🙂' : 'Preenche todos os campos, por favor 🙂'; inv.focus(); return; }
       const btn = form.querySelector('button[type=submit]');
       btn.disabled = true; btn.textContent = 'Enviando...';
       try {
