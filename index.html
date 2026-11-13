@@ -173,6 +173,17 @@ section{scroll-margin-top:84px}
 .item-nicho .legenda .mao{display:block;font-size:14px;color:#3a3a3a}
 
 /* ---------- depoimentos ---------- */
+/* ---------- fotos para marcas ---------- */
+.fotos-marcas{background:var(--azul);padding:80px 0;border-top:var(--borda)}
+.fotos-marcas .titulo{text-align:center;margin-bottom:12px;transform-origin:center}
+.fotos-marcas .titulo .cursiva{color:var(--uva);font-size:1.1em}
+.galeria{columns:4;column-gap:20px}
+.foto-item{display:block;width:100%;break-inside:avoid;margin:0 0 22px;padding:8px;background:var(--branco);border:var(--borda);box-shadow:4px 4px 0 var(--preto);cursor:zoom-in;text-align:left;transition:transform .15s}
+.foto-item:hover{transform:translate(-2px,-2px) rotate(-.6deg)}
+.foto-item img{width:100%;height:auto;display:block;background:#e9e5d8}
+.foto-item .legenda{display:block;font-family:var(--mao);font-size:15px;margin-top:6px}
+.player-caixa.modo-foto{aspect-ratio:auto;height:auto;max-width:min(94vw,1100px)}
+.player-caixa.modo-foto img{display:block;max-width:100%;max-height:90vh;width:auto;height:auto;border:var(--borda);background:#000}
 .depoimentos{background:var(--oliva);color:var(--branco);padding:80px 0;border-block:var(--borda)}
 .depoimentos .titulo{text-align:center;margin-bottom:50px;transform-origin:center}
 .depoimentos .titulo .cursiva{color:var(--limao);font-size:1.1em}
@@ -241,6 +252,7 @@ section{scroll-margin-top:84px}
   .duvidas{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:860px){
+  .galeria{columns:3}
   .menu-links{display:none}
   .menu-abrir{display:inline-block}
   .menu.aberto .menu-links{display:flex;flex-direction:column;gap:0;position:absolute;left:32px;right:32px;top:100%;background:var(--branco);border:var(--borda);border-top:0;color:var(--preto)}
@@ -276,6 +288,8 @@ section{scroll-margin-top:84px}
   .sobre-foto-area{padding-left:38px}
   .vertical{font-size:23px}
   .grade-videos{grid-template-columns:repeat(2,1fr);gap:14px}
+  .galeria{columns:2;column-gap:12px}
+  .foto-item{margin-bottom:12px;padding:5px;box-shadow:3px 3px 0 var(--preto)}
   .fileira .cartao{flex-basis:76%}
   .fileira .cartao.forte{flex-basis:82%}
   .campos{grid-template-columns:1fr}
@@ -383,6 +397,15 @@ section{scroll-margin-top:84px}
   </div>
 </section>
 
+<!-- FOTOS PARA MARCAS -->
+<section class="fotos-marcas" id="fotos">
+  <div class="envelope">
+    <h2 class="titulo" data-en='Photos for <span class="cursiva">brands</span>'>Fotos para <span class="cursiva">marcas</span></h2>
+    <p class="sub" data-en="click a photo to see it bigger">clique na foto pra ver maior</p>
+    <div class="galeria" id="galeria"></div>
+  </div>
+</section>
+
 <!-- 5. O QUE AS MARCAS FALAM -->
 <section class="depoimentos" id="depoimentos">
   <div class="envelope">
@@ -423,6 +446,7 @@ section{scroll-margin-top:84px}
   <div class="player-caixa">
     <button class="player-fechar" id="player-fechar" aria-label="Fechar vídeo" data-en-label="Close video">✕</button>
     <video id="player-video" controls playsinline></video>
+    <img id="player-foto" alt="" hidden>
   </div>
 </div>
 
@@ -617,6 +641,8 @@ function fecharPlayer() {
   if (p.hidden) return;
   v.pause(); v.removeAttribute('src'); v.load();
   const f = $('#player-yt'); if (f) f.remove();
+  const img = $('#player-foto'); img.hidden = true; img.removeAttribute('src');
+  $('.player-caixa').classList.remove('modo-foto');
   p.hidden = true;
   document.body.style.overflow = '';
   if (focoAntes) focoAntes.focus({ preventScroll: true });
@@ -648,7 +674,7 @@ let menuObservado = false;
 function montarMenu() {
   const nome = (DADOS.nome || 'Seu Nome').trim().split(/\s+/);
   const logo = `${esc(nome[0])}<span>✦</span>${esc(nome.length > 1 ? nome[nome.length - 1] : '')}`;
-  const links = [['#sobre', t('Sobre mim', 'About me')], ['#destaques', t('Destaques', 'Highlights')], ['#nichos', t('Nichos', 'Niches')], ['#depoimentos', t('O que as marcas falam', 'What brands say')], ['#contato', t('Contato', 'Contact')]];
+  const links = [['#sobre', t('Sobre mim', 'About me')], ['#destaques', t('Destaques', 'Highlights')], ['#nichos', t('Nichos', 'Niches')], ['#fotos', t('Fotos', 'Photos')], ['#depoimentos', t('O que as marcas falam', 'What brands say')], ['#contato', t('Contato', 'Contact')]];
   const html = (id) => `
     <div class="menu-barra">
       <a class="logo" href="#topo">${logo}</a>
@@ -685,7 +711,7 @@ function montarCapa() {
   $('#capa-frase').textContent = D('frase') || '';
   $('#provas').innerHTML = (D('provas') || []).slice(0, 3).map(p => `<li><strong>${esc(p.numero)}</strong><span>${esc(p.texto)}</span></li>`).join('');
   montarFoto($('#foto-capa'), DADOS.fotoCapa, 'Retrato com rosto, luz natural e ambiente real. Sem selfie: a capa mostra o seu nível', t(`Foto de ${DADOS.nome}`, `Photo of ${DADOS.nome}`));
-  montarFoto($('#foto-tras'), DADOS.fotoSobre, 'Segunda foto (a mesma do Sobre mim)', '');
+  montarFoto($('#foto-tras'), DADOS.fotoCapa2 || DADOS.fotoSobre, 'Segunda foto da capa (fica atrás, moldura limão)', '');
 }
 
 function montarSobre() {
@@ -821,6 +847,31 @@ function montarElogios() {
   $('#marcas-lista').querySelectorAll('img').forEach(img => img.onerror = () => { img.replaceWith(document.createTextNode(img.dataset.nome || '')); });
 }
 
+function montarFotos() {
+  const lista = (DADOS.fotos || []).filter(f => f && f.foto);
+  const g = $('#galeria');
+  if (!lista.length) { g.innerHTML = lacuna('📷', 'Coloque suas fotos para marcas em midia/fotos e liste em', 'DADOS.fotos'); return; }
+  g.innerHTML = lista.map((f, i) => `<button class="foto-item" type="button" data-i="${i}" aria-label="${esc(t('Ver foto maior', 'See bigger photo'))}${f.alt ? ': ' + esc(f.alt) : ''}">
+      <img src="${esc(caminho(f.foto))}" alt="${esc(f.alt || '')}" loading="lazy" decoding="async">
+      ${f.legenda ? `<span class="legenda">${esc(f.legenda)}</span>` : ''}</button>`).join('');
+  g.querySelectorAll('.foto-item').forEach(b => {
+    const f = lista[+b.dataset.i];
+    $('img', b).onerror = () => { b.outerHTML = lacuna('📷', 'Foto não encontrada', f.foto); };
+    b.addEventListener('click', () => abrirFoto(f.foto, f.alt));
+  });
+}
+function abrirFoto(src, alt) {
+  const p = $('#player'), img = $('#player-foto');
+  focoAntes = document.activeElement;
+  document.querySelectorAll('video').forEach(x => x.pause());
+  $('#player-video').hidden = true;
+  $('.player-caixa').classList.add('modo-foto');
+  img.src = caminho(src); img.alt = alt || ''; img.hidden = false;
+  p.hidden = false;
+  document.body.style.overflow = 'hidden';
+  $('#player-fechar').focus();
+}
+
 function botaoContatoHTML(classe) {
   if (linkZap()) return `<a class="botao ${classe}" href="${esc(linkZap())}" target="_blank" rel="noopener">💬 ${t('Chamar no WhatsApp', 'Chat on WhatsApp')}</a>`;
   if (linkEmail()) return `<a class="botao ${classe}" href="${esc(linkEmail())}">✉️ ${t('Mandar e-mail', 'Send an email')}</a>`;
@@ -878,7 +929,7 @@ function montarContato() {
 
 function montarTudo() {
   aplicarTextosFixos();
-  montarMenu(); montarCapa(); montarSobre(); montarFaixa(); montarDestaques(); montarNichos(); montarElogios(); montarContato();
+  montarMenu(); montarCapa(); montarSobre(); montarFaixa(); montarDestaques(); montarNichos(); montarFotos(); montarElogios(); montarContato();
   primeiraMontagem = false;
 }
 function iniciar() {
@@ -939,6 +990,25 @@ const DADOS = {
   // Suas fotos: retrato da capa e foto do dia a dia (Sobre mim)
   fotoCapa: 'midia/capa.jpg',
   fotoSobre: 'midia/sobre.jpg',
+  // Segunda foto da capa (a de trás, com moldura limão). Vazio = usa a foto do Sobre mim.
+  fotoCapa2: 'midia/capa-2.jpg',
+
+  // FOTOS PARA MARCAS (seção de fotos). foto: arquivo em midia/fotos | alt: o que aparece na foto
+  // (ajuda quem usa leitor de tela) | legenda: texto opcional embaixo da foto (ex.: 'Monti Eyewear')
+  fotos: [
+    { foto: 'midia/fotos/01.jpg', alt: 'Mariana segurando o whey Nutrilatina e uma tigela de frutas vermelhas', legenda: '' },
+    { foto: 'midia/fotos/02.jpg', alt: 'Pastéis de nata num prato da Pastéis de Belém, com óculos de sol', legenda: '' },
+    { foto: 'midia/fotos/03.jpg', alt: 'Café e pastéis de nata na mesa, com óculos de sol pretos', legenda: '' },
+    { foto: 'midia/fotos/04.jpg', alt: 'Mariana de óculos de sol e bolsa em frente ao Bosco Verticale, em Milão', legenda: '' },
+    { foto: 'midia/fotos/05.jpg', alt: 'Mariana guardando os óculos de sol na bolsa', legenda: '' },
+    { foto: 'midia/fotos/06.jpg', alt: 'Mariana dentro da Basílica de São Pedro, com óculos na cabeça', legenda: '' },
+    { foto: 'midia/fotos/07.jpg', alt: 'Mariana de óculos de sol em frente à Basílica de São Pedro', legenda: '' },
+    { foto: 'midia/fotos/08.jpg', alt: 'Mariana na Praça São Pedro, em Roma', legenda: '' },
+    { foto: 'midia/fotos/09.jpg', alt: 'Mariana de óculos de sol num mirante em Roma', legenda: '' },
+    { foto: 'midia/fotos/10.jpg', alt: 'Mariana de costas, olhando Roma', legenda: '' },
+    { foto: 'midia/fotos/11.jpg', alt: 'Mariana sorrindo de óculos de sol diante de um muro de pedra com flores', legenda: '' },
+    { foto: 'midia/fotos/12.jpg', alt: 'Close de Mariana usando óculos de sol pretos', legenda: '' }
+  ],
 
   // Texto do Sobre mim, em primeira pessoa (quem você é, onde mora, rotina,
   // por que as marcas do seu nicho combinam com você). Linha em branco = novo parágrafo.
