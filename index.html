@@ -69,6 +69,10 @@ section{scroll-margin-top:84px}
 .menu-links a{text-decoration:none}
 .menu-links a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
 .pilula{font-family:var(--mao);font-size:16px;background:var(--limao);border:var(--borda);border-radius:999px;padding:7px 16px;text-decoration:none;white-space:nowrap}
+.menu-direita{display:flex;gap:8px;align-items:center}
+.idioma{font-family:var(--mao);font-size:15px;background:var(--branco);border:var(--borda);border-radius:999px;padding:6px 12px;white-space:nowrap;line-height:1.2}
+.idioma b{font-weight:400;background:var(--lilas);border-radius:999px;padding:1px 6px}
+.idioma span{padding:1px 4px}
 .menu-abrir{display:none;background:none;border:var(--borda);padding:6px 10px;font-family:var(--mao);font-size:16px}
 .menu-fixo{position:fixed;top:12px;left:0;right:0;z-index:60;transform:translateY(-130%);transition:transform .25s}
 .menu-fixo.visivel{transform:none}
@@ -256,8 +260,10 @@ section{scroll-margin-top:84px}
   .envelope,.menu,.capa-grade,.faixa-dica{padding-left:16px;padding-right:16px}
   .menu.aberto .menu-links{left:16px;right:16px}
   .menu-barra{padding:8px 8px 8px 12px;gap:8px}
-  .logo{font-size:17px}
+  .logo{font-size:16px}
   .pilula{font-size:14px;padding:6px 10px}
+  .idioma{font-size:13px;padding:5px 7px}
+  .idioma b,.idioma span{padding:1px 3px}
   .menu-abrir{font-size:14px;padding:5px 8px}
   .capa-grade{padding-top:40px}
   .capa-frase{font-size:17px}
@@ -278,6 +284,12 @@ section{scroll-margin-top:84px}
   .player{padding:12px}
   .player-fechar{top:6px;right:6px}
 }
+@media (max-width:400px){
+  .logo{font-size:15px}
+  .menu-barra{gap:6px}
+  .menu-direita{gap:6px}
+  .menu .pilula{display:none}
+}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -293,14 +305,14 @@ section{scroll-margin-top:84px}
   <nav class="menu" id="menu" aria-label="Menu principal"></nav>
   <div class="capa-grade">
     <div class="capa-texto">
-      <div class="pombo"><span class="emoji" aria-hidden="true">🕊️</span><span class="cursiva">me chama!</span></div>
-      <p class="capa-pre">A UGC creator <span class="cursiva">por trás de</span></p>
+      <div class="pombo"><span class="emoji" aria-hidden="true">🕊️</span><span class="cursiva" data-en="let's talk!">me chama!</span></div>
+      <p class="capa-pre" data-en='The UGC creator <span class="cursiva">behind</span>'>A UGC creator <span class="cursiva">por trás de</span></p>
       <h1 class="capa-nome" id="capa-nome"></h1>
       <p class="capa-nichos" id="capa-nichos"></p>
       <p class="capa-frase" id="capa-frase"></p>
       <div class="capa-botoes">
-        <a class="botao" href="#destaques">Ver meus melhores vídeos</a>
-        <a class="botao" href="#contato">Falar comigo</a>
+        <a class="botao" href="#destaques" data-en="See my best videos">Ver meus melhores vídeos</a>
+        <a class="botao" href="#contato" data-en="Talk to me">Falar comigo</a>
       </div>
       <ul class="provas" id="provas"></ul>
     </div>
@@ -308,7 +320,7 @@ section{scroll-margin-top:84px}
       <div class="foto-moldura foto-tras"><div class="quadro" id="foto-tras"></div></div>
       <div class="foto-moldura foto-frente">
         <div class="quadro" id="foto-capa"></div>
-        <div class="selo-brilho" role="img" aria-label="Selo Brilho: aluna Rafa Chagas">
+        <div class="selo-brilho" role="img" aria-label="Selo Brilho: aluna Rafa Chagas" data-en-label="Brilho badge: Rafa Chagas student">
           <svg viewBox="0 0 120 120" aria-hidden="true">
             <defs><path id="circulo-selo" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
             <circle cx="60" cy="60" r="58" fill="#DCCDF6" stroke="#111" stroke-width="1.2"/>
@@ -333,7 +345,7 @@ section{scroll-margin-top:84px}
     </div>
     <div class="sobre-grade">
       <div class="sobre-foto-area">
-        <span class="vertical" aria-hidden="true">que bom que você veio!</span>
+        <span class="vertical" aria-hidden="true" data-en="so glad you're here!">que bom que você veio!</span>
         <div class="postal"><div class="quadro" id="foto-sobre"></div></div>
         <svg class="seta" viewBox="0 0 80 70" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6,58 C14,30 30,50 38,30 C44,16 30,10 30,22 C30,36 56,30 70,14"/><path d="M58,12 L71,13 L68,26"/></svg>
       </div>
@@ -341,21 +353,21 @@ section{scroll-margin-top:84px}
         <h3 class="titulo" id="sobre-frase"></h3>
         <div class="corpo" id="sobre-corpo"></div>
         <ul class="diferenciais" id="diferenciais"></ul>
-        <p class="selo-metodo">✦ Formada no Método Profissão do Futuro · aluna da Rafa Chagas</p>
+        <p class="selo-metodo" data-en="✦ Trained in the Profissão do Futuro Method · Rafa Chagas student">✦ Formada no Método Profissão do Futuro · aluna da Rafa Chagas</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- faixa de marcas (rolando) -->
-<div class="faixa" id="faixa" aria-label="Marcas que já atendi"></div>
+<div class="faixa" id="faixa" aria-label="Marcas que já atendi" data-en-label="Brands I have worked with"></div>
 <div class="faixa-dica" id="faixa-dica" hidden></div>
 
 <!-- 3. DESTAQUES -->
 <section class="destaques" id="destaques">
   <div class="envelope">
-    <h2 class="titulo">Meus destaques <span class="cursiva">(os melhores)</span></h2>
-    <p class="sub">clique no vídeo pra ver com som</p>
+    <h2 class="titulo" data-en='My highlights <span class="cursiva">(the best ones)</span>'>Meus destaques <span class="cursiva">(os melhores)</span></h2>
+    <p class="sub" data-en="click a video to watch it with sound">clique no vídeo pra ver com som</p>
     <div class="fileira" id="fileira"></div>
   </div>
 </section>
@@ -363,8 +375,8 @@ section{scroll-margin-top:84px}
 <!-- 4. CONTEÚDO POR NICHOS -->
 <section class="nichos" id="nichos">
   <div class="envelope">
-    <h2 class="titulo">Conteúdo por nichos</h2>
-    <p class="sub">escolha o nicho da sua marca</p>
+    <h2 class="titulo" data-en="Content by niche">Conteúdo por nichos</h2>
+    <p class="sub" data-en="pick your brand's niche">escolha o nicho da sua marca</p>
     <div class="abas" role="tablist" id="abas"></div>
     <div id="paineis"></div>
   </div>
@@ -373,10 +385,10 @@ section{scroll-margin-top:84px}
 <!-- 5. O QUE AS MARCAS FALAM -->
 <section class="depoimentos" id="depoimentos">
   <div class="envelope">
-    <h2 class="titulo">O que as marcas <span class="cursiva">falam</span></h2>
+    <h2 class="titulo" data-en='What brands <span class="cursiva">say</span>'>O que as marcas <span class="cursiva">falam</span></h2>
     <div class="elogios" id="elogios"></div>
     <div class="marcas-lista">
-      <h3>marcas que já atendi</h3>
+      <h3 data-en="brands I have worked with">marcas que já atendi</h3>
       <div id="marcas-lista"></div>
     </div>
   </div>
@@ -386,8 +398,8 @@ section{scroll-margin-top:84px}
 <section class="contato" id="contato">
   <div class="envelope">
     <div class="contato-topo">
-      <h2 class="titulo">Bora trabalhar <span class="cursiva">juntas?</span></h2>
-      <p>Me conta da sua marca e do produto: eu volto com ideia de roteiro e orçamento.</p>
+      <h2 class="titulo" data-en="Let&#39;s work &lt;span class=&quot;cursiva&quot;&gt;together?&lt;/span&gt;">Bora trabalhar <span class="cursiva">juntas?</span></h2>
+      <p data-en="Tell me about your brand and product: I'll get back to you with a script idea and a quote.">Me conta da sua marca e do produto: eu volto com ideia de roteiro e orçamento.</p>
     </div>
     <div class="contato-botoes" id="contato-botoes"></div>
     <div id="form-area"></div>
@@ -398,17 +410,17 @@ section{scroll-margin-top:84px}
 
 <footer class="rodape">
   <span class="cursiva" id="rodape-nome"></span>
-  <p>UGC creator · aluna da Rafa Chagas</p>
+  <p data-en="UGC creator · Rafa Chagas student">UGC creator · aluna da Rafa Chagas</p>
 </footer>
 
-<a class="zap-fixo" id="zap-fixo" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+<a class="zap-fixo" id="zap-fixo" target="_blank" rel="noopener" aria-label="Falar no WhatsApp" data-en-label="Chat on WhatsApp">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4a.5.5 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.7 11.7 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.5-.3Z"/></svg>
 </a>
 
 <!-- player grande -->
-<div class="player" id="player" hidden role="dialog" aria-modal="true" aria-label="Vídeo">
+<div class="player" id="player" hidden role="dialog" aria-modal="true" aria-label="Vídeo" data-en-label="Video">
   <div class="player-caixa">
-    <button class="player-fechar" id="player-fechar" aria-label="Fechar vídeo">✕</button>
+    <button class="player-fechar" id="player-fechar" aria-label="Fechar vídeo" data-en-label="Close video">✕</button>
     <video id="player-video" controls playsinline></video>
   </div>
 </div>
@@ -426,6 +438,40 @@ const temMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches
 const linkExterno = (s) => /instagram\.com|tiktok\.com|drive\.google|youtu/i.test(s || '');
 const caminho = (s) => (/%/.test(s) ? s : encodeURI(s));
 
+/* ---------- idioma (BR / EN) ---------- */
+let LANG = 'pt';
+const t = (pt, en) => (LANG === 'en' ? en : pt);
+// pega o campo em inglês (DADOS.ingles) quando a página está em EN; se estiver vazio, usa o português
+function D(campo) {
+  const en = DADOS.ingles && DADOS.ingles[campo];
+  const vazio = en == null || en === '' || (Array.isArray(en) && !en.length);
+  return LANG === 'en' && !vazio ? en : DADOS[campo];
+}
+function idiomaInicial() {
+  const q = (new URLSearchParams(location.search).get('lang') || '').toLowerCase();
+  if (q === 'en' || q === 'pt') return q;
+  try { const salvo = localStorage.getItem('idioma'); if (salvo === 'en' || salvo === 'pt') return salvo; } catch (e) {}
+  return 'pt';
+}
+function aplicarTextosFixos() {
+  document.documentElement.lang = t('pt-BR', 'en');
+  document.title = t(`${DADOS.nome} · portfólio UGC`, `${DADOS.nome} · UGC portfolio`);
+  document.querySelectorAll('[data-en]').forEach(el => {
+    if (el.dataset.pt == null) el.dataset.pt = el.innerHTML;
+    el.innerHTML = LANG === 'en' ? el.dataset.en : el.dataset.pt;
+  });
+  document.querySelectorAll('[data-en-label]').forEach(el => {
+    if (el.dataset.ptLabel == null) el.dataset.ptLabel = el.getAttribute('aria-label');
+    el.setAttribute('aria-label', LANG === 'en' ? el.dataset.enLabel : el.dataset.ptLabel);
+  });
+}
+function trocarIdioma() {
+  LANG = LANG === 'en' ? 'pt' : 'en';
+  try { localStorage.setItem('idioma', LANG); } catch (e) {}
+  try { const u = new URL(location.href); if (LANG === 'en') u.searchParams.set('lang', 'en'); else u.searchParams.delete('lang'); history.replaceState(null, '', u); } catch (e) {}
+  montarTudo();
+}
+
 function lacuna(icone, dica, arquivo) {
   return `<div class="lacuna"><span class="icone" aria-hidden="true">${icone}</span><span>${esc(dica)}</span>${arquivo ? `<code>${esc(arquivo)}</code>` : ''}</div>`;
 }
@@ -433,7 +479,7 @@ function lacunaTexto(dica) { return `<span class="lacuna-texto">${esc(dica)}</sp
 
 /* ---------- links de contato ---------- */
 function primeiroNome() { return (DADOS.nome || '').trim().split(/\s+/)[0] || ''; }
-function mensagemPronta() { return `Oi, ${primeiroNome()}! Vi seu portfólio e quero conversar sobre vídeos pra minha marca.`; }
+function mensagemPronta() { return t(`Oi, ${primeiroNome()}! Vi seu portfólio e quero conversar sobre vídeos pra minha marca.`, `Hi, ${primeiroNome()}! I saw your portfolio and I'd like to talk about videos for my brand.`); }
 function linkZap() {
   let n = String(DADOS.whatsapp || '').replace(/\D/g, '');
   if (!n) return '';
@@ -442,7 +488,7 @@ function linkZap() {
 }
 function linkEmail() {
   if (!DADOS.email) return '';
-  return `mailto:${DADOS.email}?subject=${encodeURIComponent('Orçamento de vídeos UGC')}&body=${encodeURIComponent(mensagemPronta())}`;
+  return `mailto:${DADOS.email}?subject=${encodeURIComponent(t('Orçamento de vídeos UGC', 'UGC video quote'))}&body=${encodeURIComponent(mensagemPronta())}`;
 }
 function linkContato() { return linkZap() || linkEmail(); }
 function linkInsta() { const u = String(DADOS.instagram || '').replace(/^@/, '').trim(); return u ? `https://instagram.com/${u}` : ''; }
@@ -486,7 +532,7 @@ function montarVideo(box, { src, titulo, capa, dica, auto }) {
   box.insertAdjacentHTML('beforeend', '<span class="play" aria-hidden="true">▶</span>');
   box.setAttribute('role', 'button');
   box.setAttribute('tabindex', '0');
-  box.setAttribute('aria-label', 'Abrir vídeo' + (titulo ? ': ' + titulo : ''));
+  box.setAttribute('aria-label', t('Abrir vídeo', 'Open video') + (titulo ? ': ' + titulo : ''));
 
   if (auto && !semMovimento) {
     videoAuto = v;
@@ -548,16 +594,18 @@ function medirVideo(titulo) {
 }
 
 /* ---------- montagem das seções ---------- */
+let menuObservado = false;
 function montarMenu() {
   const nome = (DADOS.nome || 'Seu Nome').trim().split(/\s+/);
   const logo = `${esc(nome[0])}<span>✦</span>${esc(nome.length > 1 ? nome[nome.length - 1] : '')}`;
-  const links = [['#sobre','Sobre mim'],['#destaques','Destaques'],['#nichos','Nichos'],['#depoimentos','O que as marcas falam'],['#contato','Contato']];
+  const links = [['#sobre', t('Sobre mim', 'About me')], ['#destaques', t('Destaques', 'Highlights')], ['#nichos', t('Nichos', 'Niches')], ['#depoimentos', t('O que as marcas falam', 'What brands say')], ['#contato', t('Contato', 'Contact')]];
   const html = (id) => `
     <div class="menu-barra">
       <a class="logo" href="#topo">${logo}</a>
-      <ul class="menu-links" id="${id}-links">${links.map(([h, t]) => `<li><a href="${h}">${t}</a></li>`).join('')}</ul>
+      <ul class="menu-links" id="${id}-links">${links.map(([h, txt]) => `<li><a href="${h}">${txt}</a></li>`).join('')}</ul>
       <div class="menu-direita">
-        <a class="pilula" href="#contato">fale comigo</a>
+        <button class="idioma" type="button" lang="${t('en', 'pt')}" aria-label="${t('Switch to English', 'Mudar para português')}">${LANG === 'en' ? '<span>BR</span>/<b>EN</b>' : '<b>BR</b>/<span>EN</span>'}</button>
+        <a class="pilula" href="#contato">${t('fale comigo', 'talk to me')}</a>
         <button class="menu-abrir" type="button" aria-expanded="false" aria-controls="${id}-links">menu</button>
       </div>
     </div>`;
@@ -567,7 +615,11 @@ function montarMenu() {
     const b = $('.menu-abrir', nav);
     b.addEventListener('click', () => { const ab = nav.classList.toggle('aberto'); b.setAttribute('aria-expanded', ab); });
     nav.querySelectorAll('.menu-links a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('aberto'); b.setAttribute('aria-expanded', 'false'); }));
+    $('.idioma', nav).addEventListener('click', () => { trocarIdioma(); $('.idioma', nav).focus(); });
   });
+  if (!f.classList.contains('visivel')) f.querySelectorAll('a,button').forEach(x => x.tabIndex = -1);
+  if (menuObservado) return;
+  menuObservado = true;
   // o menu fixo aparece quando a capa sai da tela
   new IntersectionObserver(([e]) => {
     f.classList.toggle('visivel', !e.isIntersecting);
@@ -579,36 +631,36 @@ function montarMenu() {
 
 function montarCapa() {
   $('#capa-nome').innerHTML = esc(DADOS.nome || 'Seu nome').replace(/\s+/, '<br>');
-  $('#capa-nichos').innerHTML = DADOS.nichosResumo ? 'UGC creator de ' + esc(DADOS.nichosResumo) : lacunaTexto('UGC creator de [seus nichos]');
-  $('#capa-frase').textContent = DADOS.frase || '';
-  $('#provas').innerHTML = (DADOS.provas || []).slice(0, 3).map(p => `<li><strong>${esc(p.numero)}</strong><span>${esc(p.texto)}</span></li>`).join('');
-  montarFoto($('#foto-capa'), DADOS.fotoCapa, 'Retrato com rosto, luz natural e ambiente real. Sem selfie: a capa mostra o seu nível', `Foto de ${DADOS.nome}`);
+  $('#capa-nichos').innerHTML = D('nichosResumo') ? t('UGC creator de ', 'UGC creator for ') + esc(D('nichosResumo')) : lacunaTexto('UGC creator de [seus nichos]');
+  $('#capa-frase').textContent = D('frase') || '';
+  $('#provas').innerHTML = (D('provas') || []).slice(0, 3).map(p => `<li><strong>${esc(p.numero)}</strong><span>${esc(p.texto)}</span></li>`).join('');
+  montarFoto($('#foto-capa'), DADOS.fotoCapa, 'Retrato com rosto, luz natural e ambiente real. Sem selfie: a capa mostra o seu nível', t(`Foto de ${DADOS.nome}`, `Photo of ${DADOS.nome}`));
   montarFoto($('#foto-tras'), DADOS.fotoSobre, 'Segunda foto (a mesma do Sobre mim)', '');
 }
 
 function montarSobre() {
-  $('#sobre-titulo').textContent = `Prazer, ${primeiroNome() || 'seu nome'}`;
-  $('#sobre-linha').textContent = DADOS.nichosResumo ? `sou a ${primeiroNome()} e crio vídeos UGC pra marcas de ${DADOS.nichosResumo}` : '';
+  $('#sobre-titulo').textContent = t(`Prazer, ${primeiroNome() || 'seu nome'}`, `Hi, I'm ${primeiroNome()}`);
+  $('#sobre-linha').textContent = D('nichosResumo') ? t(`sou a ${primeiroNome()} e crio vídeos UGC pra marcas de ${D('nichosResumo')}`, `I create UGC videos for ${D('nichosResumo')} brands`) : '';
   // título a partir da frase: "Conteúdo que parece conversa" / "e vende como anúncio"
-  const frase = DADOS.frase || '';
-  const i = frase.toLowerCase().indexOf(' e ');
+  const frase = D('frase') || '';
+  const i = frase.toLowerCase().indexOf(t(' e ', ' and '));
   if (i > 0) {
     const l1 = frase.slice(0, i).trim().split(' '), ult = l1.pop();
     $('#sobre-frase').innerHTML = `${esc(l1.join(' '))} <span class="cursiva">${esc(ult)}</span><br><span class="marca-texto">${esc(frase.slice(i + 1))}</span>`;
   } else {
     $('#sobre-frase').textContent = frase;
   }
-  const t = (DADOS.sobreTexto || '').trim();
-  $('#sobre-corpo').innerHTML = t
-    ? t.split(/\n\s*\n/).map(p => `<p>${esc(p)}</p>`).join('')
+  const texto = (D('sobreTexto') || '').trim();
+  $('#sobre-corpo').innerHTML = texto
+    ? texto.split(/\n\s*\n/).map(p => `<p>${esc(p)}</p>`).join('')
     : lacuna('✍️', 'Escreva 3 a 4 frases em primeira pessoa: quem você é, onde mora, sua rotina e por que as marcas do seu nicho combinam com você.', 'DADOS.sobreTexto');
-  $('#diferenciais').innerHTML = (DADOS.diferenciais || []).map((d, n) => `<li><span class="num">${String(n + 1).padStart(2, '0')}</span><span>${esc(d)}</span></li>`).join('');
-  montarFoto($('#foto-sobre'), DADOS.fotoSobre, 'Você no dia a dia: gravando, na rotina, com produto na mão', `${DADOS.nome} no dia a dia`);
+  $('#diferenciais').innerHTML = (D('diferenciais') || []).map((d, n) => `<li><span class="num">${String(n + 1).padStart(2, '0')}</span><span>${esc(d)}</span></li>`).join('');
+  montarFoto($('#foto-sobre'), DADOS.fotoSobre, 'Você no dia a dia: gravando, na rotina, com produto na mão', t(`${DADOS.nome} no dia a dia`, `${DADOS.nome} day to day`));
 }
 
 function montarFaixa() {
   const marcas = (DADOS.marcas || []).filter(m => m && (m.nome || m.logo));
-  const lemas = ['agenda aberta', 'vídeo que vende', 'brilho da rafa', 'parece conversa', 'vende como anúncio', 'entrega rápida'];
+  const lemas = LANG === 'en' ? ['booking now', 'videos that sell', 'brilho da rafa', 'feels like a conversation', 'sells like an ad', 'fast delivery'] : ['agenda aberta', 'vídeo que vende', 'brilho da rafa', 'parece conversa', 'vende como anúncio', 'entrega rápida'];
   const itens = marcas.length
     ? marcas.map(m => m.logo ? `<img src="${esc(caminho(m.logo))}" alt="${esc(m.nome)}" data-nome="${esc(m.nome)}">` : esc(m.nome))
     : lemas.map(esc);
@@ -623,7 +675,7 @@ function montarFaixa() {
   }
 }
 
-const ROTULOS = ['o mais forte', 'queridinho', 'viralizou'];
+const ROTULOS = { pt: ['o mais forte', 'queridinho', 'viralizou'], en: ['the strongest', 'fan favorite', 'went viral'] };
 function montarDestaques() {
   const f = $('#fileira');
   const lista = (DADOS.destaques || []).slice(0, 3);
@@ -635,7 +687,7 @@ function montarDestaques() {
       <div class="vid" data-i="${n}"></div>
       <div class="cartao-info">
         <span class="cartao-num">${String(n + 1).padStart(2, '0')}</span>
-        <span class="cartao-rotulo">${ROTULOS[n]}</span>
+        <span class="cartao-rotulo">${ROTULOS[LANG][n]}</span>
         <span class="cartao-titulo">${d.titulo ? esc(d.titulo) : lacunaTexto('título curto do vídeo')}</span>
         <span class="cartao-meta">${meta || lacunaTexto('nicho · formato (ADS, review, unboxing, tutorial, nativo)')}</span>
       </div>
@@ -650,12 +702,15 @@ function montarDestaques() {
   });
 }
 
+let nichoAtivo = null, primeiraMontagem = true;
 function montarNichos() {
   const abas = $('#abas'), paineis = $('#paineis');
   const nichos = DADOS.nichos || [];
-  abas.innerHTML = nichos.map((n, i) => `<button class="aba" role="tab" type="button" id="aba-${slug(n.nome)}" aria-controls="painel-${slug(n.nome)}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-c="${slug(n.nome)}">${esc(n.nome)}</button>`).join('');
+  const nomesEn = (DADOS.ingles && DADOS.ingles.nichos) || [];
+  const nomeVisivel = (n, i) => (LANG === 'en' && nomesEn[i]) || n.nome;
+  abas.innerHTML = nichos.map((n, i) => `<button class="aba" role="tab" type="button" id="aba-${slug(n.nome)}" aria-controls="painel-${slug(n.nome)}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-c="${slug(n.nome)}">${esc(nomeVisivel(n, i))}</button>`).join('');
   paineis.innerHTML = nichos.map((n, i) => `<div role="tabpanel" id="painel-${slug(n.nome)}" aria-labelledby="aba-${slug(n.nome)}" ${i === 0 ? '' : 'hidden'}>
-      <p class="aviso" hidden>mínimo 3 vídeos: com menos, tire o nicho</p>
+      <p class="aviso" hidden>${t('mínimo 3 vídeos: com menos, tire o nicho', 'minimum 3 videos: with fewer, remove this niche')}</p>
       <div class="grade-videos">${(n.videos || []).map((v, j) => `<div class="item-nicho"><div class="vid" data-n="${i}" data-j="${j}"></div>
         <p class="legenda">${v.titulo ? esc(v.titulo) : lacunaTexto('título do vídeo')}${v.formato ? `<span class="mao">${esc(v.formato)}</span>` : ''}</p></div>`).join('')}</div>
     </div>`).join('');
@@ -674,6 +729,7 @@ function montarNichos() {
 
   const botoes = [...abas.querySelectorAll('.aba')];
   const ativar = (c, focar) => {
+    nichoAtivo = c;
     botoes.forEach(b => {
       const sim = b.dataset.c === c;
       b.setAttribute('aria-selected', sim); b.tabIndex = sim ? 0 : -1;
@@ -693,8 +749,9 @@ function montarNichos() {
     });
   });
   // link com ?c=nome-do-nicho abre direto na aba e rola até a seção
+  if (nichoAtivo && !primeiraMontagem && botoes.some(b => b.dataset.c === nichoAtivo)) ativar(nichoAtivo);
   const c = slug(new URLSearchParams(location.search).get('c'));
-  if (c && botoes.some(b => b.dataset.c === c)) {
+  if (primeiraMontagem && c && botoes.some(b => b.dataset.c === c)) {
     ativar(c);
     requestAnimationFrame(() => setTimeout(() => $('#nichos').scrollIntoView({ behavior: semMovimento ? 'auto' : 'smooth' }), 150));
   }
@@ -715,57 +772,68 @@ function montarElogios() {
 }
 
 function botaoContatoHTML(classe) {
-  if (linkZap()) return `<a class="botao ${classe}" href="${esc(linkZap())}" target="_blank" rel="noopener">💬 Chamar no WhatsApp</a>`;
-  if (linkEmail()) return `<a class="botao ${classe}" href="${esc(linkEmail())}">✉️ Mandar e-mail</a>`;
+  if (linkZap()) return `<a class="botao ${classe}" href="${esc(linkZap())}" target="_blank" rel="noopener">💬 ${t('Chamar no WhatsApp', 'Chat on WhatsApp')}</a>`;
+  if (linkEmail()) return `<a class="botao ${classe}" href="${esc(linkEmail())}">✉️ ${t('Mandar e-mail', 'Send an email')}</a>`;
   return '';
 }
 
+let formEnviado = false;
 function montarContato() {
   const insta = linkInsta();
   $('#contato-botoes').innerHTML = botaoContatoHTML('limao') +
     (insta ? `<a class="botao branco" href="${esc(insta)}" target="_blank" rel="noopener">📸 Instagram ${esc('@' + String(DADOS.instagram).replace(/^@/, ''))}</a>` : '');
   const zf = $('#zap-fixo');
-  if (linkContato()) { zf.href = linkContato(); if (!linkZap()) zf.setAttribute('aria-label', 'Mandar e-mail'); } else zf.remove();
+  if (zf) { if (linkContato()) { zf.href = linkContato(); if (!linkZap()) zf.setAttribute('aria-label', t('Mandar e-mail', 'Send an email')); } else zf.remove(); }
 
-  if (DADOS.formspree) {
+  if (DADOS.formspree && formEnviado) {
+    $('#form-area').innerHTML = `<div class="orcamento form-ok" role="status"><strong>${t('Recebi! Te chamo em breve.', 'Got it! I\'ll get back to you soon.')}</strong></div>`;
+  } else if (DADOS.formspree) {
     $('#form-area').innerHTML = `<form class="orcamento" id="orcamento" novalidate>
-      <h3>Pedir orçamento</h3>
-      <p>Leva 1 minuto. Eu respondo por e-mail. Prefere WhatsApp? Use o botão “Chamar no WhatsApp” aqui em cima.</p>
+      <h3>${t('Pedir orçamento', 'Request a quote')}</h3>
+      <p>${t('Leva 1 minuto. Eu respondo por e-mail. Prefere WhatsApp? Use o botão “Chamar no WhatsApp” aqui em cima.', 'It takes 1 minute. I\'ll reply by email. Prefer WhatsApp? Use the “Chat on WhatsApp” button above.')}</p>
       <div class="campos">
-        <div class="campo"><label for="f-nome">Seu nome</label><input id="f-nome" name="nome" required autocomplete="name"></div>
-        <div class="campo"><label for="f-empresa">Sua marca ou empresa</label><input id="f-empresa" name="empresa" required autocomplete="organization"></div>
-        <div class="campo"><label for="f-produto">Qual produto entra no vídeo?</label><input id="f-produto" name="produto" required></div>
-        <div class="campo"><label for="f-prazo">Pra quando você precisa?</label><input id="f-prazo" name="prazo" required placeholder="ex.: até dia 20"></div>
-        <div class="campo largo"><label for="f-email">Seu e-mail (é pra ele que eu respondo)</label><input id="f-email" name="email" type="email" required autocomplete="email" inputmode="email" placeholder="voce@suamarca.com.br"></div>
+        <div class="campo"><label for="f-nome">${t('Seu nome', 'Your name')}</label><input id="f-nome" name="nome" required autocomplete="name"></div>
+        <div class="campo"><label for="f-empresa">${t('Sua marca ou empresa', 'Your brand or company')}</label><input id="f-empresa" name="empresa" required autocomplete="organization"></div>
+        <div class="campo"><label for="f-produto">${t('Qual produto entra no vídeo?', 'Which product goes in the video?')}</label><input id="f-produto" name="produto" required></div>
+        <div class="campo"><label for="f-prazo">${t('Pra quando você precisa?', 'When do you need it?')}</label><input id="f-prazo" name="prazo" required placeholder="${t('ex.: até dia 20', 'e.g. by the 20th')}"></div>
+        <div class="campo largo"><label for="f-email">${t('Seu e-mail (é pra ele que eu respondo)', 'Your email (that\'s where I\'ll reply)')}</label><input id="f-email" name="email" type="email" required autocomplete="email" inputmode="email" placeholder="${t('voce@suamarca.com.br', 'you@yourbrand.com')}"></div>
       </div>
       <input class="escondido" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <button class="botao limao" type="submit">Quero meu orçamento</button>
+      <input type="hidden" name="idioma" value="${t('português', 'inglês')}">
+      <button class="botao limao" type="submit">${t('Quero meu orçamento', 'Get my quote')}</button>
       <div class="form-msg" id="form-msg" role="status"></div>
     </form>`;
     const form = $('#orcamento');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const msg = $('#form-msg');
-      if (!form.checkValidity()) { const inv = form.querySelector(':invalid'); msg.textContent = inv.validity.typeMismatch ? 'Confere o e-mail, por favor 🙂' : 'Preenche todos os campos, por favor 🙂'; inv.focus(); return; }
+      if (!form.checkValidity()) { const inv = form.querySelector(':invalid'); msg.textContent = inv.validity.typeMismatch ? t('Confere o e-mail, por favor 🙂', 'Please check your email 🙂') : t('Preenche todos os campos, por favor 🙂', 'Please fill in all the fields 🙂'); inv.focus(); return; }
       const btn = form.querySelector('button[type=submit]');
-      msg.textContent = ''; btn.disabled = true; btn.textContent = 'Enviando...';
+      msg.textContent = ''; btn.disabled = true; btn.textContent = t('Enviando...', 'Sending...');
       try {
         const r = await fetch(DADOS.formspree, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
         if (!r.ok) throw new Error(r.status);
-        form.outerHTML = `<div class="orcamento form-ok" role="status"><strong>Recebi! Te chamo em breve.</strong></div>`;
+        formEnviado = true;
+        form.outerHTML = `<div class="orcamento form-ok" role="status"><strong>${t('Recebi! Te chamo em breve.', 'Got it! I\'ll get back to you soon.')}</strong></div>`;
       } catch (err) {
-        btn.disabled = false; btn.textContent = 'Quero meu orçamento';
-        msg.innerHTML = `Não consegui enviar agora. Me chama direto por aqui: <br><br>${botaoContatoHTML('')}`;
+        btn.disabled = false; btn.textContent = t('Quero meu orçamento', 'Get my quote');
+        msg.innerHTML = `${t('Não consegui enviar agora. Me chama direto por aqui:', 'I couldn\'t send it right now. Reach me directly here:')} <br><br>${botaoContatoHTML('')}`;
       }
     });
   }
 
-  $('#duvidas').innerHTML = (DADOS.duvidas || []).map(d => `<div class="duvida"><h4>${esc(d.pergunta)}</h4>${d.resposta ? `<p>${esc(d.resposta)}</p>` : lacuna('❓', 'escreva a sua resposta', 'DADOS.duvidas')}</div>`).join('');
+  $('#duvidas').innerHTML = (D('duvidas') || []).map(d => `<div class="duvida"><h4>${esc(d.pergunta)}</h4>${d.resposta ? `<p>${esc(d.resposta)}</p>` : lacuna('❓', 'escreva a sua resposta', 'DADOS.duvidas')}</div>`).join('');
   $('#rodape-nome').textContent = DADOS.nome || '';
 }
 
-function iniciar() {
+function montarTudo() {
+  aplicarTextosFixos();
   montarMenu(); montarCapa(); montarSobre(); montarFaixa(); montarDestaques(); montarNichos(); montarElogios(); montarContato();
+  primeiraMontagem = false;
+}
+function iniciar() {
+  LANG = idiomaInicial();
+  montarTudo();
   ligarUmami();
   $('#player-fechar').addEventListener('click', fecharPlayer);
   $('#player').addEventListener('click', (e) => { if (e.target.id === 'player') fecharPlayer(); });
@@ -890,6 +958,33 @@ const DADOS = {
   // Marcas que você já atendeu. logo é opcional (ex.: 'midia/logos/marca.png'); sem logo, aparece o nome.
   // Exemplo: { nome: 'Marca X', logo: '' },
   marcas: [],
+
+  // VERSÃO EM INGLÊS (botão BR / EN no menu). Campo vazio = aparece o texto em português.
+  // Nomes de marcas, títulos dos vídeos e depoimentos ficam como estão (no idioma original).
+  ingles: {
+    nichosResumo: 'skincare, hair, fashion, home & decor, food, supplements, tech and travel',
+    // Mantenha o " and " na frase: é ele que divide o título do Sobre mim em duas linhas
+    frase: 'Content that feels like a conversation and sells like an ad',
+    provas: [
+      { numero: '100+', texto: 'videos created' },
+      { numero: '30+', texto: 'brands served' },
+      { numero: '7 days', texto: 'delivery time' }
+    ],
+    sobreTexto: '',
+    diferenciais: [
+      'I study the pain points of the brand\'s customers before writing anything.',
+      'My own script, approved by the brand before I film.',
+      'Ad-ready editing, with a strong hook and clean audio.'
+    ],
+    // Nomes das abas em inglês, na mesma ordem dos nichos lá em cima
+    nichos: ['skincare', 'hair', 'fashion', 'home & decor', 'food', 'supplements', 'tech', 'travel'],
+    duvidas: [
+      { pergunta: 'Where can I use the content?', resposta: '' },
+      { pergunta: 'For how long?', resposta: '' },
+      { pergunta: 'Is it exclusive?', resposta: '' },
+      { pergunta: 'What is the turnaround?', resposta: 'Delivery within 7 days.' }
+    ]
+  },
 
   // As 4 dúvidas do Contato. Resposta vazia = lacuna pra você preencher.
   duvidas: [
