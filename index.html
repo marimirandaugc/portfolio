@@ -187,9 +187,10 @@ section{scroll-margin-top:84px}
 .depoimentos{background:var(--oliva);color:var(--branco);padding:80px 0;border-block:var(--borda)}
 .depoimentos .titulo{text-align:center;margin-bottom:50px;transform-origin:center}
 .depoimentos .titulo .cursiva{color:var(--limao);font-size:1.1em}
-.elogios{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start}
+.elogios{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 28px;align-items:start}
 .elogio{background:var(--creme);color:var(--preto);border:var(--borda);box-shadow:6px 6px 0 var(--limao);padding:22px;min-height:220px;display:flex;flex-direction:column}
-.elogio:nth-child(2){transform:rotate(1.8deg)}
+.elogio:nth-child(3n+2){transform:rotate(1.8deg)}
+.elogio:nth-child(3n+3){transform:rotate(-.8deg)}
 .elogio blockquote{font-family:var(--serif);font-size:22px;line-height:1.25;flex:1}
 .elogio .quem{margin-top:16px;font-family:var(--mao);font-size:16px}
 .elogio .quem span{display:block;font-family:var(--texto);font-size:14px;color:#3a3a3a}
@@ -264,7 +265,8 @@ section{scroll-margin-top:84px}
   .sobre-foto-area{max-width:400px;margin:0 auto;width:100%}
   .seta{display:none}
   .elogios{grid-template-columns:1fr}
-  .elogio:nth-child(2){transform:rotate(1deg)}
+  .elogio:nth-child(3n+2){transform:rotate(1deg)}
+  .elogio:nth-child(3n+3){transform:none}
   .fileira{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:18px;padding:6px 6px 18px;align-items:flex-end;-webkit-overflow-scrolling:touch}
   .fileira .cartao{flex:0 0 62%;scroll-snap-align:center}
   .fileira .cartao.forte{flex-basis:72%}
@@ -834,7 +836,7 @@ function montarNichos() {
 }
 
 function montarElogios() {
-  const lista = (DADOS.elogios || []).slice(0, 3);
+  const lista = (DADOS.elogios || []).filter(e => e && (e.texto || !e.marca));
   while (lista.length < 3) lista.push({});
   $('#elogios').innerHTML = lista.map(e => e.texto
     ? `<figure class="elogio"><blockquote>“${esc(e.texto)}”</blockquote><figcaption class="quem">${esc(e.marca)}${e.detalhe ? `<span>${esc(e.detalhe)}</span>` : ''}</figcaption></figure>`
@@ -1078,15 +1080,41 @@ const DADOS = {
   ],
 
   // Depoimentos REAIS de marcas (nunca invente). texto: a frase | marca: nome | detalhe: contexto (ex.: 'campanha de lançamento, 2026')
+  // Aparecem todos, em grupos de 3 por linha (os mais fortes primeiro). Com menos de 3, sobra lacuna.
   elogios: [
-    { texto: '', marca: '', detalhe: '' },
-    { texto: '', marca: '', detalhe: '' },
-    { texto: '', marca: '', detalhe: '' }
+    { texto: 'A gente viu seu vídeo e adorou a forma como você compartilha sua experiência no Sam’s Club. Gostaríamos de repostar o seu conteúdo em nossos canais, valorizando esse olhar autêntico e espontâneo sobre a marca.', marca: 'Sam’s Club', detalhe: 'convite da marca para repostar o vídeo nos canais oficiais' },
+    { texto: 'Seu conteúdo foi criativo, dentro do tema, trouxe o lado emocional da campanha e o desejo de compra da marca. Respeitou o prazo e entregou um conteúdo excelente, recomendaríamos sim!', marca: 'ANY ANY', detalhe: 'feedback depois da campanha' },
+    { texto: 'A equipe de marketing gostou muito do seu conteúdo. Solicitaram que você nos envie o próximo vídeo para que possamos incluir tráfego. Parabéns pelo trabalho!', marca: 'Marelar', detalhe: 'vídeo escolhido para anúncio pago' },
+    { texto: 'Eu AMEI o seu vídeo, sério! Parabéns, ficou bem do jeitinho que estava imaginando!', marca: 'Lalamove', detalhe: 'mensagem da marca ao receber o vídeo' },
+    { texto: 'Eles aprovaram de primeira, adoraram! 👏', marca: 'Curaprox', detalhe: 'vídeo aprovado sem nenhuma alteração' },
+    { texto: 'Ótima produção de conteúdo!', marca: 'Vialaser', detalhe: 'avaliação 5/5 na plataforma, julho de 2026' }
   ],
 
   // Marcas que você já atendeu. logo é opcional (ex.: 'midia/logos/marca.png'); sem logo, aparece o nome.
   // Exemplo: { nome: 'Marca X', logo: '' },
-  marcas: [],
+  marcas: [
+    { nome: 'Sam’s Club', logo: '' },
+    { nome: 'L’Oréal', logo: '' },
+    { nome: 'Garnier', logo: '' },
+    { nome: 'Curaprox', logo: '' },
+    { nome: 'Lalamove', logo: '' },
+    { nome: 'Lavira', logo: '' },
+    { nome: 'Push Matcha', logo: '' },
+    { nome: 'Ozon Care', logo: '' },
+    { nome: 'Cat’s Cabeleireiros', logo: '' },
+    { nome: 'Candura', logo: '' },
+    { nome: 'Trust Nutrition', logo: '' },
+    { nome: 'Olhe', logo: '' },
+    { nome: 'YSY', logo: '' },
+    { nome: 'ANY ANY', logo: '' },
+    { nome: 'Miallegra', logo: '' },
+    { nome: 'Marelar', logo: '' },
+    { nome: 'CaveOn', logo: '' },
+    { nome: 'Gelatalle', logo: '' },
+    { nome: 'Unipega', logo: '' },
+    { nome: 'ALVA', logo: '' },
+    { nome: 'freePet', logo: '' }
+  ],
 
   // VERSÃO EM INGLÊS (botão BR / EN no menu). Campo vazio = aparece o texto em português.
   // Nomes de marcas, títulos dos vídeos e depoimentos ficam como estão (no idioma original).
