@@ -187,7 +187,8 @@ section{scroll-margin-top:84px}
 .depoimentos{background:var(--oliva);color:var(--branco);padding:80px 0;border-block:var(--borda)}
 .depoimentos .titulo{text-align:center;margin-bottom:50px;transform-origin:center}
 .depoimentos .titulo .cursiva{color:var(--limao);font-size:1.1em}
-.elogios{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 28px;align-items:start}
+.elogios{display:flex;flex-wrap:wrap;justify-content:center;gap:34px 28px;align-items:flex-start}
+.elogios>*{flex:0 0 calc((100% - 56px) / 3)}
 .elogio{background:var(--creme);color:var(--preto);border:var(--borda);box-shadow:6px 6px 0 var(--limao);padding:22px;min-height:220px;display:flex;flex-direction:column}
 .elogio:nth-child(3n+2){transform:rotate(1.8deg)}
 .elogio:nth-child(3n+3){transform:rotate(-.8deg)}
@@ -265,7 +266,7 @@ section{scroll-margin-top:84px}
   .sobre-grade{grid-template-columns:1fr;gap:44px}
   .sobre-foto-area{max-width:400px;margin:0 auto;width:100%}
   .seta{display:none}
-  .elogios{grid-template-columns:1fr}
+  .elogios>*{flex-basis:100%}
   .elogio:nth-child(3n+2){transform:rotate(1deg)}
   .elogio:nth-child(3n+3){transform:none}
   .fileira{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:18px;padding:6px 6px 18px;align-items:flex-end;-webkit-overflow-scrolling:touch}
@@ -1124,7 +1125,9 @@ const DADOS = {
   elogios: [
     { texto: 'A gente viu seu vídeo e adorou a forma como você compartilha sua experiência no Sam’s Club. Gostaríamos de repostar o seu conteúdo em nossos canais, valorizando esse olhar autêntico e espontâneo sobre a marca.', marca: 'Sam’s Club', detalhe: 'convite da marca para repostar o vídeo nos canais oficiais' },
     { texto: 'Seu conteúdo foi criativo, dentro do tema, trouxe o lado emocional da campanha e o desejo de compra da marca. Respeitou o prazo e entregou um conteúdo excelente, recomendaríamos sim!', marca: 'ANY ANY', detalhe: 'feedback depois da campanha' },
+    { texto: 'Ficou sensacional… Aprovadíssimo. Nós vamos divulgar os vídeos a partir de segunda.', marca: 'Dot’Shake · Gelatalle', detalhe: 'resposta da marca ao receber o vídeo pra aprovação' },
     { texto: 'A equipe de marketing gostou muito do seu conteúdo. Solicitaram que você nos envie o próximo vídeo para que possamos incluir tráfego. Parabéns pelo trabalho!', marca: 'Marelar', detalhe: 'vídeo escolhido para anúncio pago' },
+    { texto: 'Agradecemos a Mariana por toda parceria e carinho com a Unipega! Foi muito bom tê-la com a gente nessa ação. Esperamos que venham muitas outras oportunidades de trabalharmos juntos! 🧡🚀', marca: 'Unipega', detalhe: 'avaliação 5/5 na plataforma' },
     { texto: 'Eu AMEI o seu vídeo, sério! Parabéns, ficou bem do jeitinho que estava imaginando!', marca: 'Lalamove', detalhe: 'mensagem da marca ao receber o vídeo' },
     { texto: 'Eles aprovaram de primeira, adoraram! 👏', marca: 'Curaprox', detalhe: 'vídeo aprovado sem nenhuma alteração' },
     { texto: 'Ótima produção de conteúdo!', marca: 'Vialaser', detalhe: 'avaliação 5/5 na plataforma, julho de 2026' }
