@@ -229,7 +229,8 @@ section{scroll-margin-top:84px}
 .player{position:fixed;inset:0;z-index:100;background:rgba(17,17,17,.86);display:flex;align-items:center;justify-content:center;padding:20px}
 .player[hidden]{display:none}
 .player-caixa{position:relative;height:min(88vh,860px);aspect-ratio:9/16;max-width:100%}
-.player video{width:100%;height:100%;object-fit:contain;background:#000;border:var(--borda)}
+.player video,.player iframe{width:100%;height:100%;object-fit:contain;background:#000;border:var(--borda);display:block}
+.vid img.yt-capa{width:100%;height:100%;object-fit:cover;background:#222}
 .player-fechar{position:absolute;top:-14px;right:-14px;width:44px;height:44px;border-radius:50%;background:var(--limao);border:var(--borda);font-size:22px;line-height:1;z-index:2}
 
 /* ---------- responsivo ---------- */
@@ -434,7 +435,11 @@ const esc = (t) => String(t ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&
 const slug = (t) => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 const semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const temMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-const linkExterno = (s) => /instagram\.com|tiktok\.com|drive\.google|youtu/i.test(s || '');
+const linkExterno = (s) => /instagram\.com|tiktok\.com|drive\.google/i.test(s || '');
+// pega o código do vídeo num link do YouTube (shorts, watch, youtu.be ou embed)
+const idYoutube = (s) => { const m = String(s || '').match(/(?:youtu\.be\/|youtube\.com\/(?:shorts\/|watch\?v=|embed\/|live\/))([\w-]{11})/); return m ? m[1] : ''; };
+// capas do YouTube, da maior pra menor (oardefault = vertical, no formato original do Short)
+const CAPAS_YT = ['oardefault', 'maxresdefault', 'sddefault', 'hqdefault'];
 const caminho = (s) => (/%/.test(s) ? s : encodeURI(s));
 
 /* ---------- idioma (BR / EN) ---------- */
@@ -519,6 +524,8 @@ function montarVideo(box, { src, titulo, capa, dica, auto }) {
     console.warn('Link de Reels/TikTok/Drive não toca na página. Exporte o .mp4 e coloque na pasta midia:', src);
     return falhou('Link de rede social não toca aqui: baixe o .mp4 e coloque na pasta midia');
   }
+  const yt = idYoutube(src);
+  if (yt) return montarYoutube(box, yt, { src, titulo, capa });
   const v = document.createElement('video');
   v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'metadata';
   v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('loop', '');
@@ -548,17 +555,59 @@ function montarVideo(box, { src, titulo, capa, dica, auto }) {
   box.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(); } });
 }
 
+/* ---------- vídeo do YouTube: capa em alta + player do YouTube ao clicar ---------- */
+function montarYoutube(box, id, { src, titulo, capa }) {
+  const img = new Image();
+  img.className = 'yt-capa';
+  img.alt = titulo || '';
+  img.decoding = 'async';
+  img.loading = 'lazy';
+  let n = 0;
+  const proxima = () => {
+    if (capa && n === 0 && !img.dataset.tentouCapa) { img.dataset.tentouCapa = '1'; img.src = caminho(capa); return; }
+    if (n >= CAPAS_YT.length) { img.removeAttribute('src'); return; }
+    img.src = `https://i.ytimg.com/vi/${id}/${CAPAS_YT[n++]}.jpg`;
+  };
+  // o YouTube devolve uma imagem cinza de 120px quando a capa não existe: aí tenta a próxima
+  img.onload = () => { if (img.naturalWidth <= 120) proxima(); };
+  img.onerror = proxima;
+  proxima();
+  box.innerHTML = '';
+  box.appendChild(img);
+  box.insertAdjacentHTML('beforeend', '<span class="play" aria-hidden="true">▶</span>');
+  box.setAttribute('role', 'button');
+  box.setAttribute('tabindex', '0');
+  box.setAttribute('aria-label', t('Abrir vídeo', 'Open video') + (titulo ? ': ' + titulo : ''));
+  const abrir = () => abrirPlayer(src, titulo || id);
+  box.addEventListener('click', abrir);
+  box.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(); } });
+}
+
 /* ---------- player grande ---------- */
 let focoAntes = null;
 function abrirPlayer(src, titulo) {
   const p = $('#player'), v = $('#player-video');
   focoAntes = document.activeElement;
   document.querySelectorAll('video').forEach(x => { if (x !== v) x.pause(); });
-  v.src = caminho(src);
-  v.muted = false;
+  const yt = idYoutube(src);
+  if (yt) {
+    v.hidden = true;
+    const f = document.createElement('iframe');
+    f.id = 'player-yt';
+    f.src = `https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
+    f.title = titulo || 'YouTube';
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen = true;
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    v.after(f);
+  } else {
+    v.hidden = false;
+    v.src = caminho(src);
+    v.muted = false;
+  }
   p.hidden = false;
   document.body.style.overflow = 'hidden';
-  v.play().catch(() => {});
+  if (!yt) v.play().catch(() => {});
   $('#player-fechar').focus();
   medirVideo(titulo);
 }
@@ -566,6 +615,7 @@ function fecharPlayer() {
   const p = $('#player'), v = $('#player-video');
   if (p.hidden) return;
   v.pause(); v.removeAttribute('src'); v.load();
+  const f = $('#player-yt'); if (f) f.remove();
   p.hidden = true;
   document.body.style.overflow = '';
   if (focoAntes) focoAntes.focus({ preventScroll: true });
@@ -902,7 +952,7 @@ const DADOS = {
 
   // Seus 3 MELHORES vídeos (não os mais recentes). O primeiro é o mais forte.
   // titulo: nome curto | nicho | formato: ADS, review, unboxing, tutorial ou nativo
-  // video: arquivo .mp4 | capa: imagem opcional antes de tocar | res: resultado real (ex.: '116 vendas'), ou vazio
+  // video: arquivo .mp4 OU link do YouTube (o .mp4 carrega mais rápido e toca sozinho no mouse) | capa: imagem opcional antes de tocar | res: resultado real (ex.: '116 vendas'), ou vazio
   destaques: [
     { titulo: '', nicho: '', formato: '', video: 'midia/destaques/1.mp4', capa: '', res: '' },
     { titulo: '', nicho: '', formato: '', video: 'midia/destaques/2.mp4', capa: '', res: '' },
@@ -910,47 +960,48 @@ const DADOS = {
   ],
 
   // Uma aba por nicho. Cada nicho precisa de pelo menos 3 vídeos.
-  // Vídeos ficam em midia/nichos/NOME-DA-PASTA/. Pode acrescentar mais itens na lista.
+  // video: arquivo .mp4 em midia/nichos/NOME-DA-PASTA/ OU link do YouTube (a capa vem sozinha, em alta).
+  // Pode acrescentar mais itens na lista.
   // O link pra mandar nas plataformas é: seu-site/?c=nome-do-nicho (ex.: ?c=casa-decoracao)
   nichos: [
     { nome: 'fitness & bem-estar', videos: [
-      { titulo: '', formato: '', video: 'midia/nichos/fitness-bem-estar/1.mp4' },
+      { titulo: 'FlyPro', formato: '', video: 'https://youtube.com/shorts/Ap8hZoX_pHs' },
       { titulo: '', formato: '', video: 'midia/nichos/fitness-bem-estar/2.mp4' },
       { titulo: '', formato: '', video: 'midia/nichos/fitness-bem-estar/3.mp4' } ] },
     { nome: 'bebidas & drinks', videos: [
-      { titulo: '', formato: '', video: 'midia/nichos/bebidas-drinks/1.mp4' },
+      { titulo: 'App CaveOn Vinhos', formato: '', video: 'https://youtube.com/shorts/RHMOH5HWSNs' },
       { titulo: '', formato: '', video: 'midia/nichos/bebidas-drinks/2.mp4' },
       { titulo: '', formato: '', video: 'midia/nichos/bebidas-drinks/3.mp4' } ] },
     { nome: 'viagem', videos: [
-      { titulo: '', formato: '', video: 'midia/nichos/viagem/1.mp4' },
+      { titulo: 'Um dia na Costa Amalfitana', formato: '', video: 'https://youtube.com/shorts/5DU0eblxGf4' },
       { titulo: '', formato: '', video: 'midia/nichos/viagem/2.mp4' },
       { titulo: '', formato: '', video: 'midia/nichos/viagem/3.mp4' } ] },
     { nome: 'tech', videos: [
-      { titulo: '', formato: '', video: 'midia/nichos/tech/1.mp4' },
-      { titulo: '', formato: '', video: 'midia/nichos/tech/2.mp4' },
+      { titulo: 'App Na Pista', formato: '', video: 'https://youtube.com/shorts/WSECaAxSHWU' },
+      { titulo: 'App CaveOn Vinhos', formato: '', video: 'https://youtube.com/shorts/RHMOH5HWSNs' },
       { titulo: '', formato: '', video: 'midia/nichos/tech/3.mp4' } ] },
     { nome: 'casa & decoração', videos: [
-      { titulo: '', formato: '', video: 'midia/nichos/casa-decoracao/1.mp4' },
+      { titulo: 'UNIPEGA', formato: '', video: 'https://youtube.com/shorts/nmQp1TiOagE' },
       { titulo: '', formato: '', video: 'midia/nichos/casa-decoracao/2.mp4' },
       { titulo: '', formato: '', video: 'midia/nichos/casa-decoracao/3.mp4' } ] },
     { nome: 'gastronomia', videos: [
-      { titulo: '', formato: '', video: 'midia/nichos/gastronomia/1.mp4' },
+      { titulo: 'Dot’Shake', formato: '', video: 'https://youtube.com/shorts/xaVmRnC8Hrw' },
       { titulo: '', formato: '', video: 'midia/nichos/gastronomia/2.mp4' },
       { titulo: '', formato: '', video: 'midia/nichos/gastronomia/3.mp4' } ] },
     { nome: 'skincare', videos: [
-      { titulo: '', formato: '', video: 'midia/nichos/skincare/1.mp4' },
-      { titulo: '', formato: '', video: 'midia/nichos/skincare/2.mp4' },
+      { titulo: 'Produtos ALVA', formato: '', video: 'https://youtube.com/shorts/XWCGCFoZQP0' },
+      { titulo: 'Procedimentos estéticos', formato: '', video: 'https://youtube.com/shorts/fQx4blyn54s' },
       { titulo: '', formato: '', video: 'midia/nichos/skincare/3.mp4' } ] },
     { nome: 'beleza', videos: [
       { titulo: '', formato: '', video: 'midia/nichos/beleza/1.mp4' },
       { titulo: '', formato: '', video: 'midia/nichos/beleza/2.mp4' },
       { titulo: '', formato: '', video: 'midia/nichos/beleza/3.mp4' } ] },
     { nome: 'moda', videos: [
-      { titulo: '', formato: '', video: 'midia/nichos/moda/1.mp4' },
+      { titulo: 'MONTI Eyewear', formato: '', video: 'https://youtube.com/shorts/GDTDLq1iD50' },
       { titulo: '', formato: '', video: 'midia/nichos/moda/2.mp4' },
       { titulo: '', formato: '', video: 'midia/nichos/moda/3.mp4' } ] },
     { nome: 'pet', videos: [
-      { titulo: '', formato: '', video: 'midia/nichos/pet/1.mp4' },
+      { titulo: 'Produtos freePet', formato: '', video: 'https://youtube.com/shorts/OtzcGwsFzu0' },
       { titulo: '', formato: '', video: 'midia/nichos/pet/2.mp4' },
       { titulo: '', formato: '', video: 'midia/nichos/pet/3.mp4' } ] }
   ],
