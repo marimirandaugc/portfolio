@@ -198,7 +198,8 @@ section{scroll-margin-top:84px}
 .marcas-lista{margin-top:56px;text-align:center}
 .marcas-lista h3{font-family:var(--mao);font-weight:400;font-size:18px;color:var(--limao);margin-bottom:16px}
 .marcas-lista ul{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
-.marcas-lista li{background:var(--branco);color:var(--preto);border:var(--borda);padding:6px 14px;font-family:var(--mao);font-size:16px}
+.marcas-lista li{background:var(--branco);color:var(--preto);border:var(--borda);padding:6px 14px;font-family:var(--mao);font-size:18px;line-height:1.3}
+.marca-nome{font-style:normal;line-height:1.1}
 .marcas-lista li img{height:26px;width:auto}
 .marcas-lista .lacuna{max-width:560px;margin:0 auto;min-height:0}
 
@@ -736,15 +737,54 @@ function montarSobre() {
   montarFoto($('#foto-sobre'), DADOS.fotoSobre, 'Você no dia a dia: gravando, na rotina, com produto na mão', t(`${DADOS.nome} no dia a dia`, `${DADOS.nome} day to day`));
 }
 
+/* ---------- fonte de cada marca (parecida com o logo) ---------- */
+// carrega do Google Fonts só as letras usadas nos nomes, pra ficar levinho
+let fontesMarcasCarregadas = false;
+function carregarFontesMarcas(marcas) {
+  if (fontesMarcasCarregadas) return;
+  const familias = {};
+  marcas.forEach(m => {
+    if (!m.fonte) return;
+    const f = familias[m.fonte] = familias[m.fonte] || new Set();
+    f.add(`${m.italico ? 1 : 0},${m.peso || 400}`);
+  });
+  const nomes = Object.keys(familias);
+  if (!nomes.length) return;
+  fontesMarcasCarregadas = true;
+  const letras = [...new Set(marcas.map(m => m.nome + (m.maiusculas ? m.nome.toUpperCase() : '')).join(''))].join('');
+  const partes = nomes.map(n => {
+    const v = [...familias[n]].sort((a, b) => a.localeCompare(b, 'en', { numeric: true }));
+    return 'family=' + encodeURIComponent(n).replace(/%20/g, '+') + ':ital,wght@' + v.join(';');
+  });
+  const l = document.createElement('link');
+  l.rel = 'stylesheet';
+  l.href = `https://fonts.googleapis.com/css2?${partes.join('&')}&text=${encodeURIComponent(letras)}&display=swap`;
+  document.head.appendChild(l);
+}
+function nomeMarcaHTML(m) {
+  if (!m.fonte) return esc(m.nome);
+  const st = [`font-family:'${m.fonte.replace(/'/g, '')}',sans-serif`, `font-weight:${+m.peso || 400}`, `font-style:${m.italico ? 'italic' : 'normal'}`];
+  if (m.maiusculas) st.push('text-transform:uppercase');
+  if (m.espaco) st.push(`letter-spacing:${String(m.espaco).replace(/[^0-9.a-z-]/gi, '')}`);
+  if (m.tamanho) st.push(`font-size:${+m.tamanho}em`);
+  return `<span class="marca-nome" style="${esc(st.join(';'))}">${esc(m.nome)}</span>`;
+}
+
 function montarFaixa() {
   const marcas = (DADOS.marcas || []).filter(m => m && (m.nome || m.logo));
+  carregarFontesMarcas(marcas);
   const lemas = LANG === 'en' ? ['booking now', 'videos that sell', 'brilho da rafa', 'feels like a conversation', 'sells like an ad', 'fast delivery'] : ['agenda aberta', 'vídeo que vende', 'brilho da rafa', 'parece conversa', 'vende como anúncio', 'entrega rápida'];
   const itens = marcas.length
-    ? marcas.map(m => m.logo ? `<img src="${esc(caminho(m.logo))}" alt="${esc(m.nome)}" data-nome="${esc(m.nome)}">` : esc(m.nome))
+    ? marcas.map(m => m.logo ? `<img src="${esc(caminho(m.logo))}" alt="${esc(m.nome)}" data-nome="${esc(m.nome)}">` : nomeMarcaHTML(m))
     : lemas.map(esc);
   const bloco = (oculto) => `<div class="faixa-item"${oculto ? ' aria-hidden="true"' : ''}>${itens.map(x => `<span>${x}</span><span class="flor" aria-hidden="true">✿</span>`).join('')}</div>`;
   // repete pra rolar sem emenda
   $('#faixa').innerHTML = `<div class="faixa-trilho">${bloco(false)}${bloco(true)}${bloco(true)}${bloco(true)}</div>`;
+  // velocidade constante e devagar (uns 45 pixels por segundo), não importa quantas marcas tiver
+  const trilho = $('#faixa .faixa-trilho');
+  const ajustar = () => { const w = trilho.scrollWidth / 2; if (w > 0) trilho.style.animationDuration = Math.round(w / 45) + 's'; };
+  ajustar();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(ajustar);
   $('#faixa').querySelectorAll('img').forEach(img => img.onerror = () => { img.replaceWith(document.createTextNode(img.dataset.nome || '')); });
   if (!marcas.length) {
     const d = $('#faixa-dica');
@@ -844,7 +884,7 @@ function montarElogios() {
   ).join('');
   const marcas = (DADOS.marcas || []).filter(m => m && (m.nome || m.logo));
   $('#marcas-lista').innerHTML = marcas.length
-    ? `<ul>${marcas.map(m => `<li>${m.logo ? `<img src="${esc(caminho(m.logo))}" alt="${esc(m.nome)}" data-nome="${esc(m.nome)}">` : esc(m.nome)}</li>`).join('')}</ul>`
+    ? `<ul>${marcas.map(m => `<li>${m.logo ? `<img src="${esc(caminho(m.logo))}" alt="${esc(m.nome)}" data-nome="${esc(m.nome)}">` : nomeMarcaHTML(m)}</li>`).join('')}</ul>`
     : lacuna('🏷️', 'Liste aqui as marcas que você já atendeu', 'DADOS.marcas');
   $('#marcas-lista').querySelectorAll('img').forEach(img => img.onerror = () => { img.replaceWith(document.createTextNode(img.dataset.nome || '')); });
 }
@@ -1090,30 +1130,33 @@ const DADOS = {
     { texto: 'Ótima produção de conteúdo!', marca: 'Vialaser', detalhe: 'avaliação 5/5 na plataforma, julho de 2026' }
   ],
 
-  // Marcas que você já atendeu. logo é opcional (ex.: 'midia/logos/marca.png'); sem logo, aparece o nome.
-  // Exemplo: { nome: 'Marca X', logo: '' },
+  // Marcas que você já atendeu. logo é opcional (ex.: 'midia/logos/marca.png'); sem logo, aparece o nome
+  // escrito com uma fonte parecida com a do logo da marca (todas do Google Fonts, fonts.google.com):
+  //   fonte: nome da fonte | peso: 400 normal, 700 negrito, 900 bem grossa | maiusculas: true = tudo em maiúscula
+  //   italico: true = inclinada | espaco: espaço entre as letras (ex.: '0.1em') | tamanho: 1 = normal, 0.9 = menor
+  // Exemplo: { nome: 'Marca X', logo: '', fonte: 'Montserrat', peso: 700, maiusculas: true },
   marcas: [
-    { nome: 'Sam’s Club', logo: '' },
-    { nome: 'L’Oréal', logo: '' },
-    { nome: 'Garnier', logo: '' },
-    { nome: 'Curaprox', logo: '' },
-    { nome: 'Lalamove', logo: '' },
-    { nome: 'Lavira', logo: '' },
-    { nome: 'Push Matcha', logo: '' },
-    { nome: 'Ozon Care', logo: '' },
-    { nome: 'Cat’s Cabeleireiros', logo: '' },
-    { nome: 'Candura', logo: '' },
-    { nome: 'Trust Nutrition', logo: '' },
-    { nome: 'Olhe', logo: '' },
-    { nome: 'YSY', logo: '' },
-    { nome: 'ANY ANY', logo: '' },
-    { nome: 'Miallegra', logo: '' },
-    { nome: 'Marelar', logo: '' },
-    { nome: 'CaveOn', logo: '' },
-    { nome: 'Gelatalle', logo: '' },
-    { nome: 'Unipega', logo: '' },
-    { nome: 'ALVA', logo: '' },
-    { nome: 'freePet', logo: '' }
+    { nome: 'sam’s club', logo: '', fonte: 'Nunito', peso: 900 },
+    { nome: 'L’Oréal', logo: '', fonte: 'Bodoni Moda', peso: 500, maiusculas: true, espaco: '0.06em' },
+    { nome: 'Garnier', logo: '', fonte: 'Montserrat', peso: 800, maiusculas: true, espaco: '0.02em', tamanho: 0.9 },
+    { nome: 'Curaprox', logo: '', fonte: 'Montserrat', peso: 400, maiusculas: true, espaco: '0.1em', tamanho: 0.85 },
+    { nome: 'Lalamove', logo: '', fonte: 'Archivo', peso: 800, maiusculas: true, italico: true, tamanho: 0.9 },
+    { nome: 'Lavira', logo: '', fonte: 'Cormorant Garamond', peso: 500, maiusculas: true, espaco: '0.14em' },
+    { nome: 'Push Matcha', logo: '', fonte: 'Fredoka', peso: 700, maiusculas: true },
+    { nome: 'ozoncare', logo: '', fonte: 'Poppins', peso: 600, tamanho: 0.95 },
+    { nome: 'Cat’s Cabeleireiros', logo: '', fonte: 'Kaushan Script', peso: 400 },
+    { nome: 'Candura', logo: '', fonte: 'Lobster', peso: 400, tamanho: 1.1 },
+    { nome: 'Trust Nutrition', logo: '', fonte: 'Anton', peso: 400, maiusculas: true, espaco: '0.03em' },
+    { nome: 'olhe', logo: '', fonte: 'Satisfy', peso: 400, tamanho: 1.15 },
+    { nome: 'ysy', logo: '', fonte: 'Baloo 2', peso: 800, tamanho: 1.05 },
+    { nome: 'ANY ANY', logo: '', fonte: 'Cinzel', peso: 500, maiusculas: true, espaco: '0.3em', tamanho: 0.85 },
+    { nome: 'Miallegra', logo: '', fonte: 'Quicksand', peso: 600 },
+    { nome: 'Marelar', logo: '', fonte: 'Playfair Display', peso: 700, maiusculas: true, espaco: '0.08em', tamanho: 0.9 },
+    { nome: 'caveon', logo: '', fonte: 'Comfortaa', peso: 700 },
+    { nome: 'Gelatalle', logo: '', fonte: 'Pacifico', peso: 400 },
+    { nome: 'Unipega', logo: '', fonte: 'Oswald', peso: 700, maiusculas: true, espaco: '0.04em' },
+    { nome: 'ALVA', logo: '', fonte: 'Lexend', peso: 700, maiusculas: true, espaco: '0.12em', tamanho: 0.95 },
+    { nome: 'freePet', logo: '', fonte: 'Rubik', peso: 700 }
   ],
 
   // VERSÃO EM INGLÊS (botão BR / EN no menu). Campo vazio = aparece o texto em português.
