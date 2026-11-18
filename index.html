@@ -182,6 +182,7 @@ section{scroll-margin-top:84px}
 .foto-item:hover{transform:translate(-2px,-2px) rotate(-.6deg)}
 .foto-item img{width:100%;height:auto;display:block;background:#e9e5d8}
 .foto-item .legenda{display:block;font-family:var(--mao);font-size:15px;margin-top:6px}
+.player-caixa.modo-largo{aspect-ratio:16/9;height:auto;width:min(94vw,1100px,calc(88vh * 16 / 9))}
 .player-caixa.modo-foto{aspect-ratio:auto;height:auto;max-width:min(94vw,1100px)}
 .player-caixa.modo-foto img{display:block;max-width:100%;max-height:90vh;width:auto;height:auto;border:var(--borda);background:#000}
 .depoimentos{background:var(--oliva);color:var(--branco);padding:80px 0;border-block:var(--borda)}
@@ -541,7 +542,7 @@ function montarFoto(box, src, dica, alt) {
 
 /* ---------- vídeos ---------- */
 let videoAuto = null;
-function montarVideo(box, { src, titulo, capa, dica, auto }) {
+function montarVideo(box, { src, titulo, capa, dica, auto, horizontal, foco }) {
   const falhou = (msg) => {
     box.classList.add('vazio');
     box.removeAttribute('role'); box.removeAttribute('tabindex'); box.removeAttribute('aria-label');
@@ -554,7 +555,7 @@ function montarVideo(box, { src, titulo, capa, dica, auto }) {
     return falhou('Link de rede social não toca aqui: baixe o .mp4 e coloque na pasta midia');
   }
   const yt = idYoutube(src);
-  if (yt) return montarYoutube(box, yt, { src, titulo, capa });
+  if (yt) return montarYoutube(box, yt, { src, titulo, capa, horizontal, foco });
   const v = document.createElement('video');
   v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'metadata';
   v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('loop', '');
@@ -585,9 +586,11 @@ function montarVideo(box, { src, titulo, capa, dica, auto }) {
 }
 
 /* ---------- vídeo do YouTube: capa em alta + player do YouTube ao clicar ---------- */
-function montarYoutube(box, id, { src, titulo, capa }) {
+function montarYoutube(box, id, { src, titulo, capa, horizontal, foco }) {
   const img = new Image();
   img.className = 'yt-capa';
+  // vídeo deitado: a capa é recortada no cartão vertical, centrada no ponto 'foco' (0% = esquerda, 100% = direita)
+  if (foco) img.style.objectPosition = `${String(foco).replace(/[^0-9.%]/g, '')} 50%`;
   img.alt = titulo || '';
   img.decoding = 'async';
   img.loading = 'lazy';
@@ -607,14 +610,14 @@ function montarYoutube(box, id, { src, titulo, capa }) {
   box.setAttribute('role', 'button');
   box.setAttribute('tabindex', '0');
   box.setAttribute('aria-label', t('Abrir vídeo', 'Open video') + (titulo ? ': ' + titulo : ''));
-  const abrir = () => abrirPlayer(src, titulo || id);
+  const abrir = () => abrirPlayer(src, titulo || id, horizontal);
   box.addEventListener('click', abrir);
   box.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(); } });
 }
 
 /* ---------- player grande ---------- */
 let focoAntes = null;
-function abrirPlayer(src, titulo) {
+function abrirPlayer(src, titulo, horizontal) {
   const p = $('#player'), v = $('#player-video');
   focoAntes = document.activeElement;
   document.querySelectorAll('video').forEach(x => { if (x !== v) x.pause(); });
@@ -623,6 +626,7 @@ function abrirPlayer(src, titulo) {
     v.hidden = true;
     const f = document.createElement('iframe');
     f.id = 'player-yt';
+    if (horizontal) $('.player-caixa').classList.add('modo-largo');
     f.src = `https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
     f.title = titulo || 'YouTube';
     f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
@@ -646,7 +650,7 @@ function fecharPlayer() {
   v.pause(); v.removeAttribute('src'); v.load();
   const f = $('#player-yt'); if (f) f.remove();
   const img = $('#player-foto'); img.hidden = true; img.removeAttribute('src');
-  $('.player-caixa').classList.remove('modo-foto');
+  $('.player-caixa').classList.remove('modo-foto', 'modo-largo');
   p.hidden = true;
   document.body.style.overflow = '';
   if (focoAntes) focoAntes.focus({ preventScroll: true });
@@ -843,7 +847,7 @@ function montarNichos() {
   });
   paineis.querySelectorAll('.vid').forEach(box => {
     const n = nichos[+box.dataset.n], v = n.videos[+box.dataset.j];
-    montarVideo(box, { src: v.video, titulo: v.titulo || `${slug(n.nome)}-${+box.dataset.j + 1}`, capa: v.capa, dica: `Vídeo de ${n.nome}: coloque o .mp4 em` });
+    montarVideo(box, { src: v.video, titulo: v.titulo || `${slug(n.nome)}-${+box.dataset.j + 1}`, capa: v.capa, horizontal: v.horizontal, foco: v.foco, dica: `Vídeo de ${n.nome}: coloque o .mp4 em` });
   });
 
   const botoes = [...abas.querySelectorAll('.aba')];
@@ -1075,6 +1079,7 @@ const DADOS = {
 
   // Uma aba por nicho. Cada nicho precisa de pelo menos 3 vídeos.
   // video: arquivo .mp4 em midia/nichos/NOME-DA-PASTA/ OU link do YouTube (a capa vem sozinha, em alta).
+  // Vídeo deitado (horizontal): acrescente horizontal: true e foco: '40%' (onde fica o seu rosto, de 0% a 100%).
   // Pode acrescentar mais itens na lista.
   // O link pra mandar nas plataformas é: seu-site/?c=nome-do-nicho (ex.: ?c=casa-decoracao)
   nichos: [
@@ -1107,7 +1112,7 @@ const DADOS = {
       { titulo: 'Procedimentos estéticos', formato: '', video: 'https://youtube.com/shorts/fQx4blyn54s' },
       { titulo: '', formato: '', video: 'midia/nichos/skincare/3.mp4' } ] },
     { nome: 'beleza', videos: [
-      { titulo: '', formato: '', video: 'midia/nichos/beleza/1.mp4' },
+      { titulo: 'ViaLaser', formato: '', video: 'https://youtu.be/b5TzDBR1R7s', horizontal: true, foco: '37%' },
       { titulo: '', formato: '', video: 'midia/nichos/beleza/2.mp4' },
       { titulo: '', formato: '', video: 'midia/nichos/beleza/3.mp4' } ] },
     { nome: 'moda', videos: [
@@ -1134,7 +1139,7 @@ const DADOS = {
     { texto: 'Agradecemos a Mariana por toda parceria e carinho com a Unipega! Foi muito bom tê-la com a gente nessa ação. Esperamos que venham muitas outras oportunidades de trabalharmos juntos! 🧡🚀', marca: 'Unipega', detalhe: 'avaliação 5/5 na plataforma' },
     { texto: 'Eu AMEI o seu vídeo, sério! Parabéns, ficou bem do jeitinho que estava imaginando!', marca: 'Lalamove', detalhe: 'mensagem da marca ao receber o vídeo' },
     { texto: 'Eles aprovaram de primeira, adoraram! 👏', marca: 'Curaprox', detalhe: 'vídeo aprovado sem nenhuma alteração' },
-    { texto: 'Ótima produção de conteúdo!', marca: 'Vialaser', detalhe: 'avaliação 5/5 na plataforma, julho de 2026' }
+    { texto: 'Ótima produção de conteúdo!', marca: 'ViaLaser', detalhe: 'avaliação 5/5 na plataforma, julho de 2026' }
   ],
 
   // Marcas que você já atendeu. logo é opcional (ex.: 'midia/logos/marca.png'); sem logo, aparece o nome
@@ -1170,7 +1175,7 @@ const DADOS = {
     { nome: 'Monti Eyewear', logo: '', fonte: 'Raleway', peso: 500, maiusculas: true, espaco: '0.2em', tamanho: 0.85 },
     { nome: 'Na Pista', logo: '', fonte: 'Barlow', peso: 800, maiusculas: true, italico: true },
     { nome: 'FlyPro', logo: '', fonte: 'Exo 2', peso: 800, italico: true },
-    { nome: 'Vialaser', logo: '', fonte: 'Mulish', peso: 800 },
+    { nome: 'ViaLaser', logo: '', fonte: 'Mulish', peso: 800 },
     { nome: 'Descorcha', logo: '', fonte: 'Bebas Neue', peso: 400, espaco: '0.04em', tamanho: 1.1 },
     { nome: 'UPX', logo: '', fonte: 'Sora', peso: 800, espaco: '0.04em' },
     { nome: 'Belofty', logo: '', fonte: 'Manrope', peso: 800 }
